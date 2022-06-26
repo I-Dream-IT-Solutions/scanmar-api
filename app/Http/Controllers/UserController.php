@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Action\User\LoginAction;
-use App\Action\Users\ListOfUsers;
+use App\Action\User\MyProfileAction;
 use Auth;
 use Validator;
 use Log;
@@ -26,9 +26,15 @@ class UserController extends Controller
     return $data;
   }
 
+  public function myProfile(Request $request)
+  {
+    $action = new MyProfileAction();
+    $data = $action->execute($request);
+    return $data;
+  }
+
   public function me(Request $request)
   {
-
     return Auth::user();
   }
 

@@ -26,6 +26,16 @@ Route::group(['middleware' => 'auth.apikey'], function () {
 });
 Route::group(['middleware' => 'auth:api'], function () {
 
+  Route::get('user/profile', 'UserController@myProfile');
   Route::get('user/me', 'UserController@me');
+
+
+  Route::group(['prefix' => '/education'], function () {
+    Route::get('/','EducationController@index');
+    Route::get('/{id}','EducationController@show');
+    Route::post('/','EducationController@store');
+    Route::post('/{id}','EducationController@update');
+    Route::delete('/{id}','EducationController@destroy');
+  });
 
 });
