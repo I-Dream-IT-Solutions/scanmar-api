@@ -38,4 +38,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/{id}','EducationController@destroy');
   });
 
+  Route::group(['prefix' => '/dependent'], function () {
+    Route::get('/','DependentController@index');
+    Route::get('/{id}','DependentController@show');
+    Route::post('/','DependentController@store');
+    Route::post('/{id}','DependentController@update');
+    Route::delete('/{id}','DependentController@destroy');
+  });
+
 });
