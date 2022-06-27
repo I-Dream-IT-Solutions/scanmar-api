@@ -7,11 +7,13 @@ use App\Action\Education\EducationCreateAction;
 use App\Action\Education\EducationDeleteAction;
 use App\Action\Education\EducationListAction;
 use App\Action\Education\EducationShowAction;
+use App\Action\Education\EducationUpdateAction;
 use Auth;
 use Validator;
 use Log;
 use DB;
 use App\Http\Requests\Education\EducationCreateRequest;
+use App\Http\Requests\Education\EducationUpdateRequest;
 
 
 class EducationController extends Controller
@@ -32,6 +34,12 @@ class EducationController extends Controller
   public function show($id){
     $action = new EducationShowAction();
     $data = $action->execute($id);
+    return $data;
+  }
+
+  public function update(EducationUpdateRequest $request,$id){
+    $action = new EducationUpdateAction();
+    $data = $action->execute($request,$id);
     return $data;
   }
 
