@@ -30,6 +30,12 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('user/me', 'UserController@me');
 
 
+  Route::group(['prefix' => '/profile'], function () {
+    Route::post('/personal-information','ProfileController@personalInformation');
+    Route::post('/current-address','ProfileController@currentAddress');
+    Route::post('/emergency-contact','ProfileController@emergencyContact');
+  });
+
   Route::group(['prefix' => '/education'], function () {
     Route::get('/','EducationController@index');
     Route::get('/{id}','EducationController@show');

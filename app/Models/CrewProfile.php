@@ -11,5 +11,6 @@ class CrewProfile extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'crew_profile';
+    public $timestamps = false;
 
 }

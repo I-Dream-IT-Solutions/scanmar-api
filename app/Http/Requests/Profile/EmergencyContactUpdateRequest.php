@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Education;
+namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class EducationUpdateRequest extends FormRequest
+class EmergencyContactUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,12 @@ class EducationUpdateRequest extends FormRequest
      public function rules()
      {
        return [
-         'level' => 'required|max:191',
-         'school' => 'required|max:191',
-         'school_address' => 'max:191',
-         'course' => 'required|max:191',
-         'yearfrom' => 'required|max:191',
-         'yearto' => 'required|max:191',
+         'emerlname' => 'required|max:255',
+         'emerfname' => 'required|max:255',
+         'emermname' => 'max:255',
+         'emeradd' => 'max:255',
+         'emerrelat' => 'max:255',
+         'emertel' => 'max:255',
        ];
      }
 
@@ -43,12 +43,12 @@ class EducationUpdateRequest extends FormRequest
      public function attributes()
      {
        return [
-         'level' => 'Level',
-         'school' => 'School',
-         'school_address' => 'School Address',
-         'course' => 'Course',
-         'yearfrom' => 'Year From',
-         'yearto' => 'Year To',
+         'emerlname' => 'Last Name',
+         'emerfname' => 'First Name',
+         'emermname' => 'Middle Name',
+         'emeradd' => 'Address',
+         'emerrelat' => 'Relation',
+         'emertel' => 'Telephone',
        ];
      }
 }

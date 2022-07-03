@@ -28,7 +28,7 @@ class EducationCreateRequest extends FormRequest
     return [
       'level' => 'required|max:191',
       'school' => 'required|max:191',
-      'school_address' => 'required|max:191',
+      'school_address' => 'max:191',
       'course' => 'required|max:191',
       'yearfrom' => 'required|max:191',
       'yearto' => 'required|max:191',

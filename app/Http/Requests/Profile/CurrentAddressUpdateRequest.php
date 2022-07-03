@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Education;
+namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class EducationUpdateRequest extends FormRequest
+class CurrentAddressUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,10 @@ class EducationUpdateRequest extends FormRequest
      public function rules()
      {
        return [
-         'level' => 'required|max:191',
-         'school' => 'required|max:191',
-         'school_address' => 'max:191',
-         'course' => 'required|max:191',
-         'yearfrom' => 'required|max:191',
-         'yearto' => 'required|max:191',
+         'address' => 'required|max:255',
+         'address_region_code' => 'max:255',
+         'address_province_code' => 'required|max:255',
+         'address_city_muni_code' => 'required|max:255',
        ];
      }
 
@@ -43,12 +41,10 @@ class EducationUpdateRequest extends FormRequest
      public function attributes()
      {
        return [
-         'level' => 'Level',
-         'school' => 'School',
-         'school_address' => 'School Address',
-         'course' => 'Course',
-         'yearfrom' => 'Year From',
-         'yearto' => 'Year To',
+         'address' => 'Address',
+         'address_region_code' => 'Region',
+         'address_province_code' => 'Province',
+         'address_city_muni_code' => 'City / Municipality',
        ];
      }
 }
