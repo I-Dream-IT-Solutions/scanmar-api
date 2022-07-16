@@ -52,4 +52,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/{id}','DependentController@destroy');
   });
 
+  Route::group(['prefix' => '/address'], function () {
+    Route::get('/region','AddressController@index');
+    Route::get('/province','AddressController@province');
+    Route::get('/city','AddressController@city');
+    Route::get('/barangay','AddressController@barangay');
+  });
+
 });
