@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::group(['prefix' => '/profile'], function () {
     Route::post('/personal-information','ProfileController@personalInformation');
     Route::post('/current-address','ProfileController@currentAddress');
+    Route::post('/provincial-address','ProfileController@provincialAddress');
     Route::post('/emergency-contact','ProfileController@emergencyContact');
   });
 

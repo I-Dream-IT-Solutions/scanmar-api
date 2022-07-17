@@ -26,12 +26,12 @@ class EmergencyContactUpdateRequest extends FormRequest
      public function rules()
      {
        return [
-         'emerlname' => 'required|max:255',
-         'emerfname' => 'required|max:255',
-         'emermname' => 'max:255',
-         'emeradd' => 'max:255',
-         'emerrelat' => 'max:255',
-         'emertel' => 'max:255',
+         'lastName' => 'required|max:255',
+         'firstName' => 'required|max:255',
+         'middleName' => 'max:255',
+         'address' => 'max:255',
+         'relation' => 'max:255',
+         'contact' => 'max:255',
        ];
      }
 
@@ -43,12 +43,12 @@ class EmergencyContactUpdateRequest extends FormRequest
      public function attributes()
      {
        return [
-         'emerlname' => 'Last Name',
-         'emerfname' => 'First Name',
-         'emermname' => 'Middle Name',
-         'emeradd' => 'Address',
-         'emerrelat' => 'Relation',
-         'emertel' => 'Telephone',
+         'lastName' => 'Last Name',
+         'firstName' => 'First Name',
+         'middleName' => 'Middle Name',
+         'address' => 'Address',
+         'relation' => 'Relation',
+         'contact' => 'Contact',
        ];
      }
 }

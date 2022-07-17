@@ -7,6 +7,7 @@ use Session;
 use Log;
 use Auth;
 use App\Models\CrewProfile;
+use App\Action\User\MyProfileAction;
 
 class CurrentAddressUpdateAction
 {
@@ -19,12 +20,14 @@ class CurrentAddressUpdateAction
 
     $profile->update([
       'address'  => isset($data['address'])?$data['address']:null,
-      'address_region_code'  => isset($data['address_region_code'])?$data['address_region_code']:null,
-      'address_province_code'  => isset($data['address_province_code'])?$data['address_province_code']:null,
-      'address_city_muni_code'  => isset($data['address_city_muni_code'])?$data['address_city_muni_code']:null,
+      'address_province_code'  => isset($data['provinceCode'])?$data['provinceCode']:null,
+      'address_city_muni_code'  => isset($data['cityCode'])?$data['cityCode']:null,
+      'address_barangay_code'  => isset($data['barangayCode'])?$data['barangayCode']:null,
     ]);
 
-    return $profile;
+    $action = new MyProfileAction();
+
+    return $action->execute($request);
   }
 
 

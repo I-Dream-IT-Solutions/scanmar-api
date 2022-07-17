@@ -21,4 +21,4 @@ Route::get('/image', function () {
     return view('welcome');
 });
 
-Route::get('/image', 'EntryController@viewImage');
+Route::get('/image', 'ProfileController@viewImage');

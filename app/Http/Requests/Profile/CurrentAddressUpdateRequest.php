@@ -27,9 +27,9 @@ class CurrentAddressUpdateRequest extends FormRequest
      {
        return [
          'address' => 'required|max:255',
-         'address_region_code' => 'max:255',
-         'address_province_code' => 'required|max:255',
-         'address_city_muni_code' => 'required|max:255',
+         'provinceCode' => 'required|max:255',
+         'cityCode' => 'required|max:255',
+         'barangayCode' => 'required|max:255',
        ];
      }
 
@@ -42,9 +42,9 @@ class CurrentAddressUpdateRequest extends FormRequest
      {
        return [
          'address' => 'Address',
-         'address_region_code' => 'Region',
-         'address_province_code' => 'Province',
-         'address_city_muni_code' => 'City / Municipality',
+         'provinceCode' => 'Province',
+         'cityCode' => 'City',
+         'barangayCode' => 'Barangay',
        ];
      }
 }
