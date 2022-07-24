@@ -18,7 +18,10 @@ class EmergencyContactUpdateAction
 
     $profile = CrewProfile::find(Auth::user()->crew_profile_id);
 
-    $profile->update([
+    $metadata = str_replace('\\','',$profile->metadata);
+    $metadata = json_decode($metadata,true);
+
+    $profile->fill([
       'emerlname'  => isset($data['lastName'])?$data['lastName']:null,
       'emerfname'  => isset($data['firstName'])?$data['firstName']:null,
       'emermname'  => isset($data['middleName'])?$data['middleName']:null,
@@ -26,6 +29,13 @@ class EmergencyContactUpdateAction
       'emerrelat'  => isset($data['relation'])?$data['relation']:null,
       'emertel'  => isset($data['contact'])?$data['contact']:null,
     ]);
+
+    $changes = $profile->getDirty();
+
+    $changes = array_merge($metadata,$changes);
+    $profile = CrewProfile::find(Auth::user()->crew_profile_id);
+    $profile->metadata = json_encode($changes);
+    $profile->save();
 
     $action = new MyProfileAction();
 

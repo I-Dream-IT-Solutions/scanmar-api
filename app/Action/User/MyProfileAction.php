@@ -19,6 +19,12 @@ class MyProfileAction
     $birthDate = $profile->date_of_birth;
     $currentDate = date("d-m-Y");
 
+    $metadata = str_replace('\\','',$profile->metadata);
+    $metadata = json_decode($metadata,true);
+
+
+    $profile->fill($metadata);
+
     $age = date_diff(date_create($birthDate), date_create($currentDate));
 
     $personal = [

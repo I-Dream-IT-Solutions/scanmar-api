@@ -27,8 +27,10 @@ class PersonalInformationUpdateAction
       $photo = $newFilename;
     }
 
+    $metadata = str_replace('\\','',$profile->metadata);
+    $metadata = json_decode($metadata,true);
 
-    $profile->update([
+    $profile->fill([
       'photo'  => $photo,
       'first_name'  => isset($data['firstName'])?$data['firstName']:null,
       'middle_name'  => isset($data['middleName'])?$data['middleName']:null,
@@ -56,6 +58,15 @@ class PersonalInformationUpdateAction
       'recommend'  => isset($data['recommendedBy'])?$data['recommendedBy']:null,
       'relation'  => isset($data['relation'])?$data['relation']:null,
     ]);
+
+    $changes = $profile->getDirty();
+
+    $changes = array_merge($metadata,$changes);
+
+
+    $profile = CrewProfile::find(Auth::user()->crew_profile_id);
+    $profile->metadata = json_encode($changes);
+    $profile->save();
 
     $action = new MyProfileAction();
 
