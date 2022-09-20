@@ -10,7 +10,7 @@ class Barangay extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = '_barangay';
+    protected $table = '__barangay';
     public $timestamps = false;
 
 }

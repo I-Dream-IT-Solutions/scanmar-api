@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class Region extends Model
+class CrewWorkExperience extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = '__region';
+    protected $table = 'crew_work_experience';
     public $timestamps = false;
 
 }

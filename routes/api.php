@@ -60,4 +60,20 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/barangay','AddressController@barangay');
   });
 
+  Route::group(['prefix' => '/sea-service'], function () {
+    Route::get('/','CrewWorkExperienceController@index');
+    Route::get('/{id}','CrewWorkExperienceController@show');
+    Route::post('/','CrewWorkExperienceController@store');
+    Route::post('/{id}','CrewWorkExperienceController@update');
+    Route::delete('/{id}','CrewWorkExperienceController@destroy');
+  });
+
+  Route::group(['prefix' => '/master-vessel'], function () {
+    Route::get('/','MasterVesselController@index');
+  });
+
+  Route::group(['prefix' => '/master-principal'], function () {
+    Route::get('/','MasterPrincipalController@index');
+  });
+
 });

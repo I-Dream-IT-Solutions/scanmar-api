@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class Region extends Model
+class MasterPrincipal extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = '__region';
+    protected $table = 'master_principal';
     public $timestamps = false;
 
 }

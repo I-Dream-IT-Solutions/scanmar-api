@@ -10,7 +10,7 @@ class City extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = '_citymun';
+    protected $table = '__citymun';
     public $timestamps = false;
 
 }

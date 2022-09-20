@@ -10,7 +10,7 @@ class Province extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = '_province';
+    protected $table = '__province';
     public $timestamps = false;
 
 }

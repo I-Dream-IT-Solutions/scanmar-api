@@ -14,7 +14,7 @@ class MyProfileAction
   public function execute($request)
   {
     $user = Auth::user();
-    $profile = CrewProfile::where('crew_no',$user->crew_no)->with(['barangay','province','city','prov_barangay','prov_province','prov_city'])->first();
+    $profile = CrewProfile::where('id',$user->crew_profile_id)->with(['barangay','province','city','prov_barangay','prov_province','prov_city'])->first();
 
     $birthDate = $profile->date_of_birth;
     $currentDate = date("d-m-Y");
@@ -22,7 +22,7 @@ class MyProfileAction
     $metadata = str_replace('\\','',$profile->metadata);
     $metadata = json_decode($metadata,true);
 
-
+    if(is_array($metadata))
     $profile->fill($metadata);
 
     $age = date_diff(date_create($birthDate), date_create($currentDate));
