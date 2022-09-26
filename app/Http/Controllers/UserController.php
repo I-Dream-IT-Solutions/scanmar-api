@@ -11,7 +11,7 @@ use Log;
 use DB;
 
 
-class UserController extends Controller
+  class UserController extends Controller
 {
   public function login(Request $request){
     $action = new LoginAction();
