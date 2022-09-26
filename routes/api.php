@@ -88,4 +88,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/','MasterPrincipalController@index');
   });
 
+  Route::group(['prefix' => '/payroll'], function () {
+    Route::get('/','PayrollController@index');
+  });
+
 });
