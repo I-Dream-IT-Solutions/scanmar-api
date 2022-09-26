@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['prefix' => '/crew-doc'], function () {
+  Route::get('/','CrewDocController@index');
+  Route::get('/{id}','CrewDocController@show');
+  Route::post('/','CrewDocController@store');
+  Route::post('/{id}','CrewDocController@update');
+  Route::delete('/{id}','CrewDocController@destroy');
+}); 
 
 Route::group(['prefix' => '/master-document-type'], function () {
   Route::get('/','MasterDocumentTypeController@index');
