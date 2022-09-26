@@ -72,6 +72,18 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/','MasterVesselController@index');
   });
 
+  Route::group(['prefix' => '/master-group'], function () {
+    Route::get('/','MasterGroupController@index');
+  });
+
+  Route::group(['prefix' => '/master-position'], function () {
+    Route::get('/','MasterPositionController@index');
+  });
+
+  Route::group(['prefix' => '/master-agency'], function () {
+    Route::get('/','MasterAgencyController@index');
+  });
+
   Route::group(['prefix' => '/master-principal'], function () {
     Route::get('/','MasterPrincipalController@index');
   });
