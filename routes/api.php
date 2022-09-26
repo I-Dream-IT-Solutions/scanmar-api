@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['prefix' => '/master-document-type'], function () {
+  Route::get('/','MasterDocumentTypeController@index');
+});
+
 Route::group(['prefix' => '/doc-medical-condition'], function () {
   Route::get('/','DocMedicalConditionController@index');
   Route::get('/{id}','DocMedicalConditionController@show');
