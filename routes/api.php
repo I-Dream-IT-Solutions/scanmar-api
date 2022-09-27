@@ -13,41 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix' => '/crew-doc'], function () {
-  Route::get('/','CrewDocController@index');
-  Route::get('/{id}','CrewDocController@show');
-  Route::post('/','CrewDocController@store');
-  Route::post('/{id}','CrewDocController@update');
-  Route::delete('/{id}','CrewDocController@destroy');
-}); 
-
-Route::group(['prefix' => '/master-document-type'], function () {
-  Route::get('/','MasterDocumentTypeController@index');
-});
-
-Route::group(['prefix' => '/doc-medical-condition'], function () {
-  Route::get('/','DocMedicalConditionController@index');
-  Route::get('/{id}','DocMedicalConditionController@show');
-  Route::post('/','DocMedicalConditionController@store');
-  Route::post('/{id}','DocMedicalConditionController@update');
-  Route::delete('/{id}','DocMedicalConditionController@destroy');
-}); 
-
-Route::group(['prefix' => '/document-upload'], function () {
-  Route::get('/','DocumentUploadController@index');
-  Route::get('/{id}','DocumentUploadController@show');
-  Route::post('/','DocumentUploadController@store');
-  Route::post('/{id}','DocumentUploadController@update');
-  Route::delete('/{id}','DocumentUploadController@destroy');
-}); 
-
-Route::group(['prefix' => '/document'], function () {
-  Route::get('/','DocumentController@index');
-  Route::get('/{id}','DocumentController@show');
-  Route::post('/','DocumentController@store');
-  Route::post('/{id}','DocumentController@update');
-  Route::delete('/{id}','DocumentController@destroy');
-}); 
 
 Route::post('logout', 'UserController@logout');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -105,7 +70,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/','EducationController@store');
     Route::post('/{id}','EducationController@update');
     Route::delete('/{id}','EducationController@destroy');
-  }); 
+  });
 
   Route::group(['prefix' => '/master-group'], function () {
     Route::get('/','MasterGroupController@index');
@@ -126,5 +91,44 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::group(['prefix' => '/payroll'], function () {
     Route::get('/','PayrollController@index');
   });
+
+
+  Route::group(['prefix' => '/crew-doc'], function () {
+    Route::get('/','CrewDocController@index');
+    Route::get('/{id}','CrewDocController@show');
+    Route::post('/','CrewDocController@store');
+    Route::post('/{id}','CrewDocController@update');
+    Route::delete('/{id}','CrewDocController@destroy');
+  });
+
+  Route::group(['prefix' => '/master-document-type'], function () {
+    Route::get('/','MasterDocumentTypeController@index');
+  });
+
+  Route::group(['prefix' => '/doc-medical-condition'], function () {
+    Route::get('/','DocMedicalConditionController@index');
+    Route::get('/{id}','DocMedicalConditionController@show');
+    Route::post('/','DocMedicalConditionController@store');
+    Route::post('/{id}','DocMedicalConditionController@update');
+    Route::delete('/{id}','DocMedicalConditionController@destroy');
+  });
+
+  Route::group(['prefix' => '/document-upload'], function () {
+    Route::get('/','DocumentUploadController@index');
+    Route::get('/{id}','DocumentUploadController@show');
+    Route::post('/','DocumentUploadController@store');
+    Route::post('/{id}','DocumentUploadController@update');
+    Route::delete('/{id}','DocumentUploadController@destroy');
+  });
+
+  Route::group(['prefix' => '/document'], function () {
+    Route::get('/','DocumentController@index');
+    Route::get('/{id}','DocumentController@show');
+    Route::post('/','DocumentController@store');
+    Route::post('/{id}','DocumentController@update');
+    Route::delete('/{id}','DocumentController@destroy');
+  });
+
+
 
 });

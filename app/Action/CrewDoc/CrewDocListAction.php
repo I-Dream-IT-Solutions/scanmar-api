@@ -16,7 +16,10 @@ class CrewDocListAction
   {
     $records = new CrewDoc();
 
+
+    $records = $records->where('crew_no',Auth::user()->crew_no);
     $records = $records->orderBy('id','DESC');
+    $records = $records->with(['document_type']);
     if($request->has('limit'))
     $records = $records->paginate($request->get('limit'));
     else

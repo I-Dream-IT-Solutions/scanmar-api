@@ -12,4 +12,9 @@ class CrewDoc extends Model
     protected $guarded = [];
     protected $table = 'crew_doc';
     public $timestamps = false;
+
+    public function document_type(){
+      return $this->belongsTo(MasterDocumentType::class, 'type','document_type_id');
+    }
+
 }
