@@ -99,7 +99,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/','MasterVesselController@index');
   });
 
-
   Route::group(['prefix' => '/education'], function () {
     Route::get('/','EducationController@index');
     Route::get('/{id}','EducationController@show');
@@ -108,8 +107,24 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/{id}','EducationController@destroy');
   }); 
 
+  Route::group(['prefix' => '/master-group'], function () {
+    Route::get('/','MasterGroupController@index');
+  });
+
+  Route::group(['prefix' => '/master-position'], function () {
+    Route::get('/','MasterPositionController@index');
+  });
+
+  Route::group(['prefix' => '/master-agency'], function () {
+    Route::get('/','MasterAgencyController@index');
+  });
+
   Route::group(['prefix' => '/master-principal'], function () {
     Route::get('/','MasterPrincipalController@index');
+  });
+
+  Route::group(['prefix' => '/payroll'], function () {
+    Route::get('/','PayrollController@index');
   });
 
 });

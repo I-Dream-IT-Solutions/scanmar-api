@@ -13,4 +13,13 @@ class CrewWorkExperience extends Model
     protected $table = 'crew_work_experience';
     public $timestamps = false;
 
+    protected $appends = [
+  		'date_range'
+  	];
+
+    public function getDateRangeAttribute(){
+
+      return date('M d, Y',strtotime($this->datefrom)) .' - '.date('M d, Y',strtotime($this->dateto));
+  	}
+
 }
