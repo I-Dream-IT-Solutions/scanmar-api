@@ -16,7 +16,7 @@ class MasterCertificateTypeListAction
   {
     $records = new MasterCertificateType();
 
-    $records = $records->orderBy('document_type_id','DESC');
+    $records = $records->orderBy('id','ASC');
     if($request->has('limit'))
     $records = $records->paginate($request->get('limit'));
     else

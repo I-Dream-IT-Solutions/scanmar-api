@@ -9,7 +9,7 @@ use Validator;
 use Log;
 use DB;
 
-class MasterCertificateType extends Controller
+class MasterCertificateTypeController extends Controller
 {
     public function index(Request $request){
         $action = new MasterCertificateTypeListAction();
