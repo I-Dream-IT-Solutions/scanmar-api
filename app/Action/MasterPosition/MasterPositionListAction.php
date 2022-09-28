@@ -1,33 +1,31 @@
 <?php
 
-namespace App\Action\CrewDoc;
+namespace App\Action\MasterPosition;
 
 use Illuminate\Pagination\Paginator;
 use Session;
 use Log;
 use DB;
-use App\Models\CrewDoc;
+use App\Models\MasterPosition;
 use Auth;
 
-class CrewDocListAction
+class MasterPositionListAction
 {
 
   public function execute($request)
   {
-    $records = new CrewDoc();
+    $records = new MasterPosition();
 
-
-    $records = $records->where('crew_no',Auth::user()->crew_no);
     $records = $records->orderBy('id','DESC');
-    $records = $records->with(['document_type']);
     if($request->has('limit'))
     $records = $records->paginate($request->get('limit'));
     else
     $records = $records->get();
 
-    return $records;
 
+    return $records;
   }
+
 
 
 }
