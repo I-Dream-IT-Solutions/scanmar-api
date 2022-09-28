@@ -32,4 +32,8 @@ class SystemUser extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function profile(){
+      return $this->belongsTo(CrewProfile::class, 'crew_profile_id','id');
+    }
+
 }

@@ -21,8 +21,11 @@ Route::post('logout', 'UserController@logout');
 
 Route::group(['middleware' => 'auth.apikey'], function () {
   Route::post('login', 'UserController@login');
-
 });
+
+
+Route::get('/crew-doc/export/{id}','CrewDocController@export');
+
 Route::group(['middleware' => 'auth:api'], function () {
 
   Route::get('user/profile', 'UserController@myProfile');
@@ -127,6 +130,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/','DocumentController@store');
     Route::post('/{id}','DocumentController@update');
     Route::delete('/{id}','DocumentController@destroy');
+  });
+
+  Route::group(['prefix' => '/notification'], function () {
+    Route::get('/','NotificationController@index');
+    Route::get('/unread','NotificationController@countUnread');
   });
 
 
