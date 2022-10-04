@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['prefix' => '/schedule'], function () {
+  Route::get('/','ScheduleController@index');
+  Route::get('/{schedule_id}','ScheduleController@show');
+  Route::post('/','ScheduleController@store');
+  Route::post('/{schedule_id}','ScheduleController@update');
+  Route::delete('/{schedule_id}','ScheduleController@destroy');
+});
+
 Route::group(['prefix' => '/schedule-status'], function () {
   Route::get('/','ScheduleStatusController@index');
 });
