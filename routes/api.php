@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['prefix' => '/master-certificate-type'], function () {
+  Route::get('/','MasterCertificateTypeController@index');
+});
+
 Route::group(['prefix' => '/schedule'], function () {
   Route::get('/','ScheduleController@index');
   Route::get('/{schedule_id}','ScheduleController@show');
@@ -147,7 +151,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/','NotificationController@index');
     Route::get('/unread','NotificationController@countUnread');
   });
-
 
 
 });
