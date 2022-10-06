@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::group(['prefix' => '/crew-contact'], function () {
+  Route::get('/','CrewContactController@index');
+  Route::get('/{id}','CrewContactController@show');
+  Route::post('/','CrewContactController@store');
+  Route::post('/{id}','CrewContactController@update');
+  Route::delete('/{id}','CrewContactController@destroy');
+}); 
+
 Route::group(['prefix' => '/certificate-request'], function () {
   Route::get('/','CertificateRequestController@index');
   Route::get('/{id}','CertificateRequestController@show');
