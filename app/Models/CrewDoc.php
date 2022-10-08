@@ -17,4 +17,12 @@ class CrewDoc extends Model
       return $this->belongsTo(MasterDocumentType::class, 'type','document_type_id');
     }
 
+    public function getDateIssueAttribute($date){
+      return date('m-d-Y',strtotime($date));
+  	}
+
+    public function getDateExpAttribute($date){
+      return date('m-d-Y',strtotime($date));
+  	}
+
 }

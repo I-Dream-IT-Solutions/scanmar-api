@@ -26,7 +26,8 @@ class CrewDocController extends Controller
         return $data;
       }
 
-      public function store(CrewDocCreateRequest $request){
+      public function store(Request $request){
+        info($request->all());
         $action = new CrewDocCreateAction();
         $data = $action->execute($request);
         return $data;

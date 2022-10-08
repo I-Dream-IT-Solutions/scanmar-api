@@ -23,9 +23,9 @@ class CrewDocCreateAction
     $filename = '';
     if ($request->hasFile('filex')) {
       $file = $request->file("filex");
-      $newFilename = 'public/'. time() . '.' . $file->getClientOriginalName();
+      $filename = time() . '.' . $file->getClientOriginalName();
+      $newFilename = Auth::user()->crew_no.'/'. $filename;
       $path = Storage::put($newFilename,file_get_contents($file));
-      $filename = $newFilename;
     }
 
     $records = CrewDoc::create([

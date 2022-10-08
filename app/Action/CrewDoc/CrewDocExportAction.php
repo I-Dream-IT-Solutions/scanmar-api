@@ -17,7 +17,7 @@ class CrewDocExportAction
   {
     $record = CrewDoc::find($id);
     $path = "https://scanmar.ph/crew-application/uploads/crew/".$record->crew_no."/". $record->filex;
-    Storage::disk('local')->put($record->filex, file_get_contents($path));
+    Storage::put($record->filex, file_get_contents($path));
 
     $path = Storage::path($record->filex);
 
