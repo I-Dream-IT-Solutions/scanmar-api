@@ -14,6 +14,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['prefix' => '/crew-contact'], function () {
+  Route::get('/','CrewContactController@index');
+  Route::get('/{id}','CrewContactController@show');
+  Route::post('/','CrewContactController@store');
+  Route::post('/{id}','CrewContactController@update');
+  Route::delete('/{id}','CrewContactController@destroy');
+}); 
+
+Route::group(['prefix' => '/certificate-request'], function () {
+  Route::get('/','CertificateRequestController@index');
+  Route::get('/{id}','CertificateRequestController@show');
+  Route::post('/','CertificateRequestController@store');
+  Route::post('/{id}','CertificateRequestController@update');
+  Route::delete('/{id}','CertificateRequestController@destroy');
+}); 
+
+Route::group(['prefix' => '/master-certificate-type'], function () {
+  Route::get('/','MasterCertificateTypeController@index');
+});
+
+Route::group(['prefix' => '/schedule'], function () {
+  Route::get('/','ScheduleController@index');
+  Route::get('/{schedule_id}','ScheduleController@show');
+  Route::post('/','ScheduleController@store');
+  Route::post('/{schedule_id}','ScheduleController@update');
+  Route::delete('/{schedule_id}','ScheduleController@destroy');
+});
+
+Route::group(['prefix' => '/schedule-status'], function () {
+  Route::get('/','ScheduleStatusController@index');
+});
+
 Route::post('logout', 'UserController@logout');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -136,7 +168,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/','NotificationController@index');
     Route::get('/unread','NotificationController@countUnread');
   });
-
 
 
 });
