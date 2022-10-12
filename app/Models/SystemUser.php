@@ -13,7 +13,7 @@ class SystemUser extends Authenticatable
     use HasFactory, Notifiable,HasApiTokens ;
     protected $guarded = [];
     protected $table = 'system_user';
-
+    public $timestamps = false;
     /**
      * The attributes that should be hidden for arrays.
      *
