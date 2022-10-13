@@ -30,7 +30,7 @@ class CrewDocDeleteAction
 
     $users = SystemUser::get();
     $target_id = [];
-    $notification_type = 'delete_document';
+    $notification_type = 'delete_doc';
 
 
     foreach($users as $user){

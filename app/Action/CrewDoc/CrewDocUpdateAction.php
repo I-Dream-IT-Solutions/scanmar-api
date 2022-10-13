@@ -76,7 +76,7 @@ class CrewDocUpdateAction
 
     $users = SystemUser::where('groupx','LIKE','%'.Auth::user()->profile->groupx.'%')->get();
     $target_id = [];
-    $notification_type = 'add_document';
+    $notification_type = 'update_doc';
 
     foreach($users as $user){
       $target_id[] = $user->id;
