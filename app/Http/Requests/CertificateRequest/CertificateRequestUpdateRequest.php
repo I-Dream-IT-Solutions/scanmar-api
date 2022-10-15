@@ -34,6 +34,7 @@ class CertificateRequestUpdateRequest extends FormRequest
             'created_date'  => 'required|max:191',
             'modified_by'  => 'required|max:191',
             'modified_date'  => 'required|max:191',
+            'uploaded_file'  => ['nullable','mimes:jpeg,jpg,png,pdf','max:10240'],
             'status'  => 'required|max:191',
           ];
      }
