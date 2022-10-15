@@ -11,4 +11,8 @@ class CertificateRequest extends Model
     protected $guarded = [];
     protected $table = 'crew_certificate_request';
     public $timestamps = false;
+
+    public function certificate_type(){
+        return $this->belongsTo(MasterCertificateType::class, 'type','certificate_type_id');
+      }
 }
