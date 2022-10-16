@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['prefix' => '/otp-email'], function () {
+  Route::any('/request-otp','OTPEmailController@requestOTP');
+  Route::post('/verify-otp','OTPEmailController@verifyOTP');
+}); 
 
 Route::post('logout', 'UserController@logout');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
