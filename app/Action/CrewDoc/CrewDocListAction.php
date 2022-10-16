@@ -18,6 +18,7 @@ class CrewDocListAction
 
 
     $records = $records->where('crew_no',Auth::user()->crew_no);
+    $records = $records->where('is_deleted','N');
     $records = $records->orderBy('id','DESC');
     $records = $records->with(['document_type']);
     if($request->has('limit'))

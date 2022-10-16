@@ -14,7 +14,7 @@ class LoginAction
   public $successStatus = 200;
   public function execute($request)
   {
-    if(Auth::attempt(['username' => request('username'), 'password' => request('password') ])){
+    if(Auth::attempt(['username' => request('username'), 'password' => request('password'),'is_crew' =>'Y' ])){
       $user = Auth::user();
       $success['token'] =  $user->createToken('scanmar')->accessToken;
       return response()->json($success, $this->successStatus);

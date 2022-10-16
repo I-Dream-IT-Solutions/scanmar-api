@@ -26,14 +26,15 @@ class PersonalInformationUpdateRequest extends FormRequest
      public function rules()
      {
        return [
-         'photo' => 'nullable|max:2048|mimes:jpg,png',
+         'photo' => 'nullable',
+         // 'photo' => 'nullable|mimes:jpg,png,jpeg',
          'firstName' => 'required|max:255',
          'middleName' => 'max:255',
          'lastName' => 'required|max:255',
          'group' => 'max:255',
          'gender' => 'required|max:255',
          'civilStatus' => 'required|max:255',
-         'birthday' => 'required|date',
+         'birthday' => 'required|date_format:m-d-Y',
          'placeOfBirth' => 'required|max:255',
          'nationality' => 'required|max:255',
          'religion' => 'max:255',

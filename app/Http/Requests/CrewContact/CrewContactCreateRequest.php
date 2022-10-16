@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\CertificateRequest;
+namespace App\Http\Requests\CrewContact;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class CertificateRequestCreateRequest extends FormRequest
+class CrewContactCreateRequest extends FormRequest
 {
   /**
   * Determine if the user is authorized to make this request.
@@ -27,14 +27,8 @@ class CertificateRequestCreateRequest extends FormRequest
   {
     return [
       'crew_no'  => 'required|max:191',
-      'certificate_type_id'  => 'required|max:191',
-      'certificate_type_option'  => 'required|max:191',
-      'remarks'  => 'required|max:191',
-      // 'created_by'  => 'required|max:191',
-      // 'created_date'  => 'required|max:191',
-      // 'modified_by'  => 'required|max:191',
-      // 'modified_date'  => 'required|max:191',
-      // 'status'  => 'required|max:191',
+      'label'  => 'required|max:191',
+      'description'  => 'required|max:191',
     ];
   }
 
@@ -46,9 +40,8 @@ class CertificateRequestCreateRequest extends FormRequest
   public function attributes()
   {
     return [
-      'certificate_type_id'  => 'Certificate',
-      'certificate_type_option'  => 'Option',
-      'remarks'  => 'Remarks',
+        'label'  => 'Label',
+        'description'  => 'Description',
     ];
   }
 

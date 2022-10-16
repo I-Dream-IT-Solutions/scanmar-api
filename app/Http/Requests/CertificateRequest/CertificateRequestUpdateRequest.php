@@ -26,16 +26,15 @@ class CertificateRequestUpdateRequest extends FormRequest
      public function rules()
      {
         return [
-            'crew_no'  => 'required|max:191',
             'certificate_type_id'  => 'required|max:191',
             'certificate_type_option'  => 'required|max:191',
             'remarks'  => 'required|max:191',
-            'created_by'  => 'required|max:191',
-            'created_date'  => 'required|max:191',
-            'modified_by'  => 'required|max:191',
-            'modified_date'  => 'required|max:191',
+            // 'created_by'  => 'required|max:191',
+            // 'created_date'  => 'required|max:191',
+            // 'modified_by'  => 'required|max:191',
+            // 'modified_date'  => 'required|max:191',
+            // 'status'  => 'required|max:191',
             'uploaded_file'  => ['nullable','mimes:jpeg,jpg,png,pdf','max:10240'],
-            'status'  => 'required|max:191',
           ];
      }
 

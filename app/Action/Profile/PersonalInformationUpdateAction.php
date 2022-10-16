@@ -16,13 +16,13 @@ class PersonalInformationUpdateAction
   public function execute($request)
   {
     $data = $request->all();
-
+    info($request->all());
     $profile = CrewProfile::find(Auth::user()->crew_profile_id);
 
     $photo = $profile->photo;
     if ($request->hasFile('photo')) {
       $file = $request->file("photo");
-      $newFilename = 'public/'. time() . '.' . $file->getClientOriginalName();
+      $newFilename = time() . '.' . $file->getClientOriginalName();
       $path = Storage::put($newFilename,file_get_contents($file));
       $photo = $newFilename;
     }
@@ -37,7 +37,7 @@ class PersonalInformationUpdateAction
       'last_name'  => isset($data['lastName'])?$data['lastName']:null,
       'gender'  => isset($data['gender'])?$data['gender']:null,
       'civil_status'  => isset($data['civilStatus'])?$data['civilStatus']:null,
-      'date_of_birth'  => isset($data['birthday'])?$data['birthday']:null,
+      'date_of_birth'  => isset($data['birthday'])?date('Y-m-d',strtotime($data['birthday'])):null,
       'place_of_birth'  => isset($data['placeOfBirth'])?$data['placeOfBirth']:null,
       'nationality'  => isset($data['nationality'])?$data['nationality']:null,
       'religion'  => isset($data['religion'])?$data['religion']:null,

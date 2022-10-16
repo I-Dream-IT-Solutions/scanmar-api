@@ -37,7 +37,7 @@ class MyProfileAction
       'gender'=> $profile->gender,
       'civilStatus'=> $profile->civil_status,
       'age'=> $age->y,
-      'birthday'=> $profile->date_of_birth,
+      'birthday'=> date('m-d-Y',strtotime($profile->date_of_birth)),
       'placeOfBirth'=> $profile->place_of_birth,
       'nationality'=> $profile->nationality,
       'religion'=> $profile->religion,
@@ -56,7 +56,8 @@ class MyProfileAction
       'pagibig'=> $profile->pagibig,
       'philhealth'=> $profile->phealth,
       'recommendedBy'=> $profile->recommend,
-      'relation'=> $profile->relation
+      'relation'=> $profile->relation,
+      'metadata'=> $profile->metadata,
     ];
 
     $contact = [

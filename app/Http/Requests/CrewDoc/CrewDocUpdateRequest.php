@@ -34,7 +34,7 @@ class CrewDocUpdateRequest extends FormRequest
       'location'  =>'max:191',
       'school'  =>'max:191',
       'remarks'  =>'max:191',
-      'filex'  =>['required','mimes:jpeg,jpg,png,pdf','max:10240'],
+      'filex'  =>['nullable','mimes:jpeg,jpg,png,pdf','max:10240'],
 
     ];
   }
