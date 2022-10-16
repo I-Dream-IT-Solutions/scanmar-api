@@ -25,12 +25,13 @@ class ScheduleCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'schedule_type'  => 'required|max:191',
+            // 'schedule_type'  => 'required|max:191',
+            'client_id'  => 'required|max:191',
             'document_type'  => 'required|max:191',
             'schedule_date'  => 'required|max:191',
             'schedule_time'  => 'required|max:191',
             'remarks'  =>  'required|max:191',
-            'document'  => 'required|max:191',
+            // 'document'  => 'required|max:191',
           ];
     }
     protected function failedValidation(Validator $validator)
@@ -42,6 +43,7 @@ class ScheduleCreateRequest extends FormRequest
     {
       return [
             'schedule_type'  => 'Schedule Type',
+            'client_id'  => 'Provider',
             'document_type'  => 'Document Type',
             'schedule_date'  => 'Schedule Date',
             'schedule_time'  => 'Schedule Time',

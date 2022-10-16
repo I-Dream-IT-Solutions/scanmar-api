@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/otp-email'], function () {
   Route::any('/request-otp','OTPEmailController@requestOTP');
   Route::post('/verify-otp','OTPEmailController@verifyOTP');
-}); 
+});
+
+Route::group(['prefix' => '/otp-sms'], function () {
+  Route::post('/request-otp','OTPSMSController@requestOTP');
+  Route::post('/verify-otp','OTPSMSController@verifyOTP');
+});
 
 Route::post('logout', 'UserController@logout');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -25,6 +30,7 @@ Route::post('logout', 'UserController@logout');
 
 Route::group(['middleware' => 'auth.apikey'], function () {
   Route::post('login', 'UserController@login');
+  Route::post('register', 'UserController@register');
 });
 
 
@@ -161,6 +167,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 
   Route::group(['prefix' => '/master-certificate-type'], function () {
     Route::get('/','MasterCertificateTypeController@index');
+  });
+
+  Route::group(['prefix' => '/supplier'], function () {
+    Route::get('/','SupplierController@index');
   });
 
   Route::group(['prefix' => '/schedule'], function () {

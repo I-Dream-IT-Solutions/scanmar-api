@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Action\User\LoginAction;
 use App\Action\User\MyProfileAction;
+use App\Action\User\RegisterAction;
 use Auth;
 use Validator;
 use Log;
