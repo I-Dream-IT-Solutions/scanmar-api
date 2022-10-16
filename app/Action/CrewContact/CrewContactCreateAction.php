@@ -20,6 +20,7 @@ class CrewContactCreateAction
       'description'  => $data['description'],
       'created_date'  => date('Y-m-d H:i:s'),
       'created_by'  => Auth::user()->id,
+      'deleted_by'  => '0',
       'modified_date'  => date('Y-m-d H:i:s'),
       'modified_by'  => Auth::user()->id,
     ]);
