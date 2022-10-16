@@ -7,7 +7,7 @@ use Session;
 use Log;
 use App\Models\CertificateRequest;
 use Auth;
-
+use Storage;
 class CertificateRequestUpdateAction
 {
 
@@ -15,7 +15,13 @@ class CertificateRequestUpdateAction
   {
     $record = CertificateRequest::find($id);
     $data = $request->all();
-
+    $filename = '';
+    if ($request->hasFile('uploaded_file')) {
+      $file = $request->file("uploaded_file");
+      $newFilename = 'public/'. time() . '.' . $file->getClientOriginalName();
+      $path = Storage::put($newFilename,file_get_contents($file));
+      $filename = $newFilename;
+    }
     $cert = [
         'crew_no'  => Auth::user()->crew_no,
         'certificate_type_id'  => $data['certificate_type_id'],
@@ -25,6 +31,7 @@ class CertificateRequestUpdateAction
         'created_date'  => $data['created_date'],
         'modified_by'  => Auth::user()->id,
         'modified_date'  => date('Y-m-d H:i:s'),
+        'uploaded_file'  => $filename,
         'status'  => config('constants.STAT_FOR_APPROVAL'),
     ];
 
