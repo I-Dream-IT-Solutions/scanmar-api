@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('user/profile', 'UserController@myProfile');
   Route::get('user/me', 'UserController@me');
 
+  Route::post('user/change-password', 'UserController@changePassword');
+
 
   Route::group(['prefix' => '/profile'], function () {
     Route::post('/personal-information','ProfileController@personalInformation');

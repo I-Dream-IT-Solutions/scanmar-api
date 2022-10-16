@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Action\User\LoginAction;
 use App\Action\User\MyProfileAction;
 use App\Action\User\RegisterAction;
+use App\Action\User\ChangePasswordAction;
 use Auth;
 use Validator;
 use Log;
 use DB;
-
 
   class UserController extends Controller
 {
@@ -23,6 +23,13 @@ use DB;
   public function register(Request $request)
   {
     $action = new RegisterAction();
+    $data = $action->execute($request);
+    return $data;
+  }
+
+  public function changePassword(Request $request)
+  {
+    $action = new ChangePasswordAction();
     $data = $action->execute($request);
     return $data;
   }
