@@ -18,12 +18,10 @@ class CrewWorkExperienceListAction
 
     $records = $records->where('crew_no',Auth::user()->crew_no);
     if($request->has('search'))
-    $records = $records->where('level','like','%'.$request->get('search').'%')
-      ->orWhere('school','like','%'.$request->get('search').'%')
-      ->orWhere('school_address','like','%'.$request->get('search').'%')
-      ->orWhere('course','like','%'.$request->get('search').'%')
-      ->orWhere('yearfrom','like','%'.$request->get('search').'%')
-      ->orWhere('yearto','like','%'.$request->get('search').'%');
+    $records = $records->where('vesname','like','%'.$request->get('search').'%')
+      ->orWhere('aname','like','%'.$request->get('search').'%')
+      ->orWhere('pname','like','%'.$request->get('search').'%')
+      ->orWhere('pos_name','like','%'.$request->get('search').'%');
 
     $records = $records->orderBy('id','DESC');
     if($request->has('limit'))
