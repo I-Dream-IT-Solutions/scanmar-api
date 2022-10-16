@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth.apikey'], function () {
 
 Route::get('/crew-doc/export/{id}','CrewDocController@export');
 
+Route::get('/image','ProfileController@viewImage');
 Route::group(['middleware' => 'auth:api'], function () {
 
   Route::get('user/profile', 'UserController@myProfile');
@@ -148,7 +149,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/','CrewContactController@store');
     Route::post('/{id}','CrewContactController@update');
     Route::delete('/{id}','CrewContactController@destroy');
-  }); 
+  });
 
   Route::group(['prefix' => '/certificate-request'], function () {
     Route::get('/','CertificateRequestController@index');
@@ -156,7 +157,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/','CertificateRequestController@store');
     Route::post('/{id}','CertificateRequestController@update');
     Route::delete('/{id}','CertificateRequestController@destroy');
-  }); 
+  });
 
   Route::group(['prefix' => '/master-certificate-type'], function () {
     Route::get('/','MasterCertificateTypeController@index');
