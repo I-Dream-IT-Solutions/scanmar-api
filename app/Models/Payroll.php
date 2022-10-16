@@ -13,7 +13,7 @@ class Payroll extends Model
     protected $table = 'crew_payroll';
     public $timestamps = false;
 
-    public function type(){
+    public function master_payroll_type(){
       return $this->belongsTo(MasterPayrollType::class, 'type','type');
     }
 
