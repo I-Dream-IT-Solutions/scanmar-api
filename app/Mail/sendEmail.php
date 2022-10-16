@@ -11,14 +11,17 @@ class sendEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $mail_details;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($mail_details)
     {
-        //
+        $this->mail_details = $mail_details;
+
     }
 
     /**
@@ -28,6 +31,6 @@ class sendEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('otp.email-request');
     }
 }
