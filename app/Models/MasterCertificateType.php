@@ -14,4 +14,9 @@ class MasterCertificateType extends Model
     protected $table = 'master_certificate_type';
     public $timestamps = false;
 
+    public function getOptionsAttribute($value)
+    {
+      return json_decode($value);
+    }
+
 }

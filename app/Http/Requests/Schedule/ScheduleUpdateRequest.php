@@ -31,14 +31,13 @@ class ScheduleUpdateRequest extends FormRequest
             'schedule_time'  => 'required|max:191',
             'remarks'  =>  'required|max:191',
             'document'  => 'required|max:191',
-            'status'  => 'required|max:191',
           ];
     }
     protected function failedValidation(Validator $validator)
     {
       throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
-  
+
     public function attributes()
     {
       return [
@@ -51,5 +50,5 @@ class ScheduleUpdateRequest extends FormRequest
             'status'  => 'Status',
       ];
     }
-  
+
   }
