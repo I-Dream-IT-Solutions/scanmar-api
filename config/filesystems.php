@@ -30,9 +30,13 @@ return [
 
     'disks' => [
 
+        // 'local' => [
+        //     'driver' => 'local',
+        //     'root' => 'https://scanmar.ph/crew-application/uploads/crew/',
+        // ],
         'local' => [
             'driver' => 'local',
-            'root' => 'https://scanmar.ph/crew-application/uploads/crew/',
+            'root' => 'D:\test',
         ],
 
         'public' => [

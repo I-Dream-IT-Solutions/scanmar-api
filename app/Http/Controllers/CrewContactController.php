@@ -9,6 +9,7 @@ use App\Action\CrewContact\CrewContactListAction;
 use App\Action\CrewContact\CrewContactShowAction;
 use App\Action\CrewContact\CrewContactUpdateAction;
 use App\Action\CrewContact\CrewContactExportAction;
+use App\Action\CrewContact\CrewPrimaryContactListAction;
 use Auth;
 use Validator;
 use Log;
@@ -20,6 +21,12 @@ class CrewContactController extends Controller
 {
     public function index(Request $request){
         $action = new CrewContactListAction();
+        $data = $action->execute($request);
+        return $data;
+      }
+
+    public function primary_contact(Request $request){
+        $action = new CrewPrimaryContactListAction();
         $data = $action->execute($request);
         return $data;
       }

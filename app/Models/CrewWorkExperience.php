@@ -14,7 +14,7 @@ class CrewWorkExperience extends Model
     public $timestamps = false;
 
     protected $appends = [
-  		'date_range'
+  		'date_range','kw'
   	];
 
     public function getDateRangeAttribute(){
@@ -47,6 +47,26 @@ class CrewWorkExperience extends Model
 
     public function getAdatedisAttribute($value){
       return date('m-d-Y',strtotime($value));
+  	}
+
+    public function getAcodeAttribute($value){
+      return (int)$value;
+  	}
+
+    public function getCausecodeAttribute($value){
+      return (int)$value;
+  	}
+
+    public function getKwAttribute(){
+      return $this->eng_kw;
+  	}
+
+    public function getStatusAttribute($value){
+      $metaData = json_decode($this->metadata,true);
+      if(isset($metaData['is_deleted']) && $metaData['is_deleted'] == 'Y')
+        return config('constants.STAT_FOR_DELETION');
+
+      return $value;
   	}
 
 }

@@ -15,12 +15,16 @@ class CertificateRequestListAction
   public function execute($request)
   {
 
-    $records = CertificateRequest::join('master_certificate_type','master_certificate_type.id','=','crew_certificate_request.certificate_type_id');
+    $records = new CertificateRequest();
 
     $records = $records->where('crew_no',Auth::user()->crew_no);
-    if($request->has('search'))
-    $records = $records->where('master_certificate_type.name','like','%'.$request->get('search').'%')
-      ->orWhere('master_certificate_type.options','like','%'.$request->get('search').'%');
+    if($request->has('search')){
+      $records = $records->where(function($q)use($request){
+        $q->whereHas('certificate_type',function($q)use($request){
+          $q->where('name','like','%'.$request->get('search').'%');
+        })->orWhere('certificate_type_option','like','%'.$request->get('search').'%');
+      });
+    }
 
     $records = $records->orderBy('crew_certificate_request.id','ASC');
     if($request->has('limit'))

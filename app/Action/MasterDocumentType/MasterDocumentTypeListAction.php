@@ -16,7 +16,7 @@ class MasterDocumentTypeListAction
   {
     $records = new MasterDocumentType();
 
-    $records = $records->orderBy('document_type_id','DESC');
+    $records = $records->orderBy('document_type_name','ASC');
     if($request->has('limit'))
     $records = $records->paginate($request->get('limit'));
     else

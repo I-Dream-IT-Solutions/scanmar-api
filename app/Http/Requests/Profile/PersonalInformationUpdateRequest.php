@@ -34,7 +34,7 @@ class PersonalInformationUpdateRequest extends FormRequest
          'group' => 'max:255',
          'gender' => 'required|max:255',
          'civilStatus' => 'required|max:255',
-         'birthday' => 'required|date_format:m-d-Y',
+         'birthday' => 'required',
          'placeOfBirth' => 'required|max:255',
          'nationality' => 'required|max:255',
          'religion' => 'max:255',

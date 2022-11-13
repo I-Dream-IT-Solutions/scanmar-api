@@ -27,16 +27,27 @@ class CrewWorkExperienceCreateRequest extends FormRequest
   {
     return [
       'pos_code' => 'required|max:255',
-      'datefrom' => 'required|date',
-      'dateto' => 'required|date',
-      'nomonth' => 'required|numeric',
-      'noyear' => 'required|numeric',
-      'nodays' => 'required|numeric',
-      'cause' => 'required|max:255',
-      'vesname' => 'required|max:255',
-      'aname' => 'required|max:255',
-      'pname' => 'required|max:255',
-      'groupx' => 'required|max:255',
+      // 'datefrom' => 'required',
+      // 'dateto' => 'required',
+      'datefrom' => 'required',
+      'dateto' => 'required',
+      // 'nomonth' => 'required|numeric',
+      // 'noyear' => 'required|numeric',
+      // 'nodays' => 'required|numeric',
+      'causecode' => 'required|max:255',
+      'vescode' => 'required|max:255',
+      'acode' => 'required|max:255',
+      'pcode' => 'required|max:255',
+
+      'typecode' => 'required|max:255',
+      'route' => 'required|max:255',
+      'enginecode' => 'required|max:255',
+      'flag' => 'required|max:255',
+      'grt' => 'max:50',
+      'bhp' => 'max:50',
+      'nrt' => 'max:50',
+      'kw' => 'max:50',
+      // 'groupx' => 'required|max:255',
     ];
   }
 
@@ -54,10 +65,10 @@ class CrewWorkExperienceCreateRequest extends FormRequest
       'nomonth' => 'No Of Month',
       'noyear' => 'No Of Year',
       'nodays' => 'No Of Days',
-      'cause' => 'Cause',
-      'vesname' => 'Vessel Name',
-      'aname' => 'A Name',
-      'pname' => 'P Name',
+      'causecode' => 'Cause',
+      'vescode' => 'Vessel Name',
+      'acode' => 'Agency Name',
+      'pcode' => 'Principal Name',
       'groupx' => 'Group',
     ];
   }

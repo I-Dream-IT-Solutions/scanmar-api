@@ -17,20 +17,32 @@ class CrewWorkExperienceListAction
     $records = new CrewWorkExperience();
 
     $records = $records->where('crew_no',Auth::user()->crew_no);
-    if($request->has('search'))
-    $records = $records->where('level','like','%'.$request->get('search').'%')
-      ->orWhere('school','like','%'.$request->get('search').'%')
-      ->orWhere('school_address','like','%'.$request->get('search').'%')
-      ->orWhere('course','like','%'.$request->get('search').'%')
-      ->orWhere('yearfrom','like','%'.$request->get('search').'%')
-      ->orWhere('yearto','like','%'.$request->get('search').'%');
+    if($request->has('search')){
+      $records = $records->where(function($q)use($request){
+        $q->where('vesname','like','%'.$request->get('search').'%')
+        ->orWhere('pos_name','like','%'.$request->get('search').'%')
+        ->orWhere('aname','like','%'.$request->get('search').'%')
+        ->orWhere('pname','like','%'.$request->get('search').'%')
+        ->orWhere('type','like','%'.$request->get('search').'%')
+        ->orWhere('cause','like','%'.$request->get('search').'%');
+      });
+    }
 
+    $records = $records->where('is_deleted','N');
     $records = $records->orderBy('id','DESC');
     if($request->has('limit'))
     $records = $records->paginate($request->get('limit'));
     else
     $records = $records->get();
 
+    foreach($records as $record){
+      if($record->status == config('constants.STAT_FOR_APPROVAL')){
+        $metaData = json_decode($record->metadata,true);
+        if($metaData)
+          $record->fill($metaData);
+
+      }
+    }
 
     return $records;
   }

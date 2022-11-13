@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
   Route::get('user/profile', 'UserController@myProfile');
   Route::get('user/me', 'UserController@me');
+  Route::post('user/change-password', 'UserController@changePassword');
+  Route::post('user/set-mpin', 'UserController@setMpin');
 
 
   Route::group(['prefix' => '/profile'], function () {
@@ -78,12 +80,28 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/','MasterVesselController@index');
   });
 
+  Route::group(['prefix' => '/master-vessel-type'], function () {
+    Route::get('/','MasterVesselTypeController@index');
+  });
+
+  Route::group(['prefix' => '/master-document'], function () {
+    Route::get('/','MasterDocumentController@index');
+  });
+
   Route::group(['prefix' => '/education'], function () {
     Route::get('/','EducationController@index');
     Route::get('/{id}','EducationController@show');
     Route::post('/','EducationController@store');
     Route::post('/{id}','EducationController@update');
     Route::delete('/{id}','EducationController@destroy');
+  });
+
+  Route::group(['prefix' => '/allottee'], function () {
+    Route::get('/','AllotteeController@index');
+    Route::get('/{id}','AllotteeController@show');
+    Route::post('/','AllotteeController@store');
+    Route::post('/{id}','AllotteeController@update');
+    Route::delete('/{id}','AllotteeController@destroy');
   });
 
   Route::group(['prefix' => '/master-group'], function () {
@@ -100,6 +118,23 @@ Route::group(['middleware' => 'auth:api'], function () {
 
   Route::group(['prefix' => '/master-principal'], function () {
     Route::get('/','MasterPrincipalController@index');
+  });
+
+  Route::group(['prefix' => '/master-flag'], function () {
+    Route::get('/','MasterFlagController@index');
+  });
+
+  Route::group(['prefix' => '/master-vessel-engine'], function () {
+    Route::get('/','MasterVesselEngineController@index');
+  });
+
+  Route::group(['prefix' => '/master-vessel-route'], function () {
+    Route::get('/','MasterVesselRouteController@index');
+  });
+
+  Route::group(['prefix' => '/master-bank'], function () {
+    Route::get('/','MasterBankController@index');
+    Route::get('/branch','MasterBankController@branch');
   });
 
   Route::group(['prefix' => '/payroll'], function () {
@@ -146,11 +181,13 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::group(['prefix' => '/notification'], function () {
     Route::get('/','NotificationController@index');
     Route::get('/unread','NotificationController@countUnread');
+    Route::get('/update','NotificationController@update');
   });
 
 
   Route::group(['prefix' => '/crew-contact'], function () {
     Route::get('/','CrewContactController@index');
+    Route::get('/primary-contact','CrewContactController@primary_contact');
     Route::get('/{id}','CrewContactController@show');
     Route::post('/','CrewContactController@store');
     Route::post('/{id}','CrewContactController@update');
@@ -167,6 +204,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 
   Route::group(['prefix' => '/master-certificate-type'], function () {
     Route::get('/','MasterCertificateTypeController@index');
+  });
+  Route::group(['prefix' => '/master-disembark-cause'], function () {
+    Route::get('/','MasterDisembarkCauseController@index');
   });
 
   Route::group(['prefix' => '/supplier'], function () {

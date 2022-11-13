@@ -14,6 +14,12 @@ class EducationShowAction
   {
     $record = CrewEducation::find($id);
 
+    $metadata = str_replace('\\','',$record->metadata);
+    $metadata = json_decode($record,true);
+
+    if(is_array($metadata))
+    $record->fill($metadata);
+
 
     return $record;
   }

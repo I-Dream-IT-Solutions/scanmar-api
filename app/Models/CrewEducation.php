@@ -13,4 +13,12 @@ class CrewEducation extends Model
     protected $table = 'crew_education';
     public $timestamps = false;
 
+    public function getStatusAttribute($value){
+      $metaData = json_decode($this->metadata,true);
+      if(isset($metaData['is_deleted']) && $metaData['is_deleted'] == 'Y')
+        return config('constants.STAT_FOR_DELETION');
+
+      return $value;
+  	}
+
 }

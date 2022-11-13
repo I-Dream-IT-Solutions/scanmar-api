@@ -17,6 +17,7 @@ class DependentListAction
     $records = new CrewDependent();
 
     $records = $records->where('crew_no',Auth::user()->crew_no);
+    $records = $records->where('is_deleted','N');
     if($request->has('search'))
     $records = $records->where('level','like','%'.$request->get('search').'%')
       ->orWhere('school','like','%'.$request->get('search').'%')
@@ -30,6 +31,15 @@ class DependentListAction
     $records = $records->paginate($request->get('limit'));
     else
     $records = $records->get();
+
+    foreach($records as $record){
+      if($record->status == config('constants.STAT_FOR_APPROVAL')){
+        $metaData = json_decode($record->metadata,true);
+        if($metaData)
+          $record->fill($metaData);
+
+      }
+    }
 
 
     return $records;

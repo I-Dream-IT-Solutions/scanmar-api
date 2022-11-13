@@ -28,9 +28,11 @@ class DependentUpdateRequest extends FormRequest
        return [
          'name' => 'required|max:255',
          'relation' => 'required|max:255',
-         'birthdate' => 'required|date',
+         'birthdate' => 'required',
          'address' => 'required|max:255',
          'contact_no' => 'required|max:255',
+         'has_benefit' => 'max:1',
+         'in_case_of_emergency' => 'max:1',
        ];
      }
 
@@ -47,6 +49,8 @@ class DependentUpdateRequest extends FormRequest
          'birthdate' => 'Birthday',
          'address' => 'Address',
          'contact_no' => 'Contact No',
+         'has_benefit' => 'Beneficiary',
+         'in_case_of_emergency' => 'In case of emergency',
        ];
      }
 }

@@ -26,6 +26,15 @@ class RegisterAction
     if ($validator->fails()) {
       return response()->json(['error'=>$validator->errors()], 401);
     }
+
+    $prefix = date('Y');
+    $crew_no = $prefix.sprintf('%04d', 1);
+
+    $crewcCnt = CrewProfile::where('crew_no','LIKE','%'.$prefix.'%')->orderBy('id', 'desc')->count();
+    if($crewcCnt){
+      $crew_no = $prefix.sprintf('%04d', $crewcCnt + 1);
+    }
+
     $input = $request->all();
     $input['password'] = Hash::make($input['password']);
     $input['is_crew'] = 'Y';
@@ -46,10 +55,11 @@ class RegisterAction
     $input['modified_by'] = '0';
     $input['photo'] = '';
     $input['crew_profile_id'] = 0;
-    $input['crew_no'] = 0;
+    $input['crew_no'] = $crew_no;
     $input['groupx'] = '';
     $input['with_reminder'] = '0';
     $input['with_import_export'] = '0';
+    $input['allow_edit_posdoc'] = '0';
     $input['allow_to_chat_by_crew'] = '0';
     $input['with_crew_notification'] = '1';
     $input['with_announcement_notification'] = '1';
@@ -58,8 +68,8 @@ class RegisterAction
     unset($input['api_key']);
     $user = SystemUser::create($input);
 
-    CrewProfile::create([
-      'crew_no'=>'',
+    $profile = CrewProfile::create([
+      'crew_no'=>$crew_no,
       'first_name'=>'',
       'last_name'=>'',
       'middle_name'=>'',
@@ -191,11 +201,13 @@ class RegisterAction
       'pagibig_file' => '',
       'tmp_pagibig_file' => '',
       'phealth_file' => '',
+      'cadet_group' => '',
       'tmp_phealth_file' => ''
 
     ]);
 
-
+    $user->crew_profile_id = $profile->id;
+    $user->save();
     $success['token'] =  $user->createToken('scanmar')->accessToken;
     return response()->json(['success'=>$success], $this->successStatus);
   }

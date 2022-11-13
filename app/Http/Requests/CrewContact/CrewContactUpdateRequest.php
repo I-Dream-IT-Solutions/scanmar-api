@@ -26,7 +26,6 @@ class CrewContactUpdateRequest extends FormRequest
   public function rules()
   {
     return [
-        'crew_no'  => 'required|max:191',
         'label'  => 'required|max:191',
         'description'  => 'required|max:191',
     ];

@@ -19,7 +19,7 @@ class ScheduleCreateAction
       'schedule_type'  => $data['schedule_type'],
       'crew_id'  => Auth::user()->crew_no,
       'client_id'  => $data['client_id'],
-      'document_type'  => $data['document_type'],
+      // 'document_type'  => $data['document_type'],
       'schedule_date'  => $data['schedule_date'],
       'schedule_time'  => $data['schedule_time'],
       'remarks'  =>  $data['remarks'],

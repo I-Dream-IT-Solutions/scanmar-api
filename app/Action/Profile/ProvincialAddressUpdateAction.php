@@ -8,6 +8,8 @@ use Log;
 use Auth;
 use App\Models\CrewProfile;
 use App\Action\User\MyProfileAction;
+use App\Models\MasterProfileApprovalFields;
+use App\Action\Notification\NotificationCreateAction;
 
 class ProvincialAddressUpdateAction
 {
@@ -17,23 +19,44 @@ class ProvincialAddressUpdateAction
     $data = $request->all();
 
     $profile = CrewProfile::find(Auth::user()->crew_profile_id);
+    $forApprovals = MasterProfileApprovalFields::get()->pluck('fieldname')->toArray();
 
     $metadata = str_replace('\\','',$profile->metadata);
     $metadata = json_decode($metadata,true);
 
-    $profile->fill([
-      'prov_address'  => isset($data['address'])?$data['address']:null,
-      'prov_address_province_code'  => isset($data['provinceCode'])?$data['provinceCode']:null,
-      'prov_address_city_muni_code'  => isset($data['cityCode'])?$data['cityCode']:null,
-      'prov_address_barangay_code'  => isset($data['barangayCode'])?$data['barangayCode']:null,
-    ]);
+    $newData = [
+      'provadd'  => isset($data['address'])?$data['address']:'',
+      'provaddress_province_code'  => isset($data['provinceCode'])?$data['provinceCode']:'',
+      'provaddress_citymun_code'  => isset($data['cityCode'])?$data['cityCode']:'',
+      'provaddress_barangay_code'  => isset($data['barangayCode'])?$data['barangayCode']:'',
+    ];
 
-    $changes = $profile->getDirty();
+    $newMetadata = [];
+    $setValue = [];
+    foreach($newData as $key => $value){
+      if(in_array($key,$forApprovals))
+        $newMetadata[$key] = $value;
+      else
+        $setValue[$key] = $value;
+    }
 
-    $changes = array_merge($metadata,$changes);
-    $profile = CrewProfile::find(Auth::user()->crew_profile_id);
-    $profile->metadata = json_encode($changes);
+    if($metadata)
+    $newMetadata = array_merge($metadata,$newMetadata);
+
+    $profile->fill($setValue);
+    $profile->metadata = json_encode($newMetadata);
+    if(count($newMetadata))
+    $profile->status = config('constants.STAT_FOR_APPROVAL');
     $profile->save();
+
+    if(count($newMetadata)){
+      $notifData =[
+        'id'=>$profile->id,
+        'name'=>$profile->first_name.' '.$profile->last_name,
+      ];
+      $notif_action = new NotificationCreateAction();
+      $notif_action->execute($notifData,'edit_profile');
+    }
 
     $action = new MyProfileAction();
 

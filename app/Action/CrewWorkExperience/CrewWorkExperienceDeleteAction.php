@@ -7,6 +7,8 @@ use Session;
 use Storage;
 use Log;
 use App\Models\CrewWorkExperience;
+use App\Action\Notification\NotificationCreateAction;
+use Auth;
 
 class CrewWorkExperienceDeleteAction
 {
@@ -15,8 +17,29 @@ class CrewWorkExperienceDeleteAction
   {
     $data = CrewWorkExperience::find($id);
 
-    $data->status = config('constants.STAT_FOR_DELETION');
+    $newData = [
+      'is_deleted'=>'Y',
+      'deleted_by'=>Auth::user()->id,
+      'delete_reason'=>"For Deletion",
+    ];
+
+    if($data->status == config('constants.STAT_NEW'))
+      $data->fill($newData);
+    else{
+      $data->metadata = json_encode($newData);
+      $data->status = config('constants.STAT_FOR_APPROVAL');
+    }
+
     $data->save();
+
+    $notifData =[
+      'id'=>$data->id,
+      'name'=>$data->pos_name,
+    ];
+
+    $notif_action = new NotificationCreateAction();
+    $notif_action->execute($notifData,'delete_work_experience');
+
     return $data;
   }
 

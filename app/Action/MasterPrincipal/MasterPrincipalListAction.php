@@ -16,7 +16,7 @@ class MasterPrincipalListAction
   {
     $records = new MasterPrincipal();
 
-    $records = $records->orderBy('id','DESC');
+    $records = $records->orderBy('principal_name','ASC');
     if($request->has('limit'))
     $records = $records->paginate($request->get('limit'));
     else

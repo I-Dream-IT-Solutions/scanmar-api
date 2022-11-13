@@ -18,9 +18,12 @@ class CrewContactListAction
     $records = new CrewContact();
 
     $records = $records->where('crew_no',Auth::user()->crew_no);
+    $records = $records->where('is_deleted','N');
     if($request->has('search'))
-    $records = $records->where('label','like','%'.$request->get('search').'%')
+    $records = $records->where(function($q)use($request){
+      $q->where('label','like','%'.$request->get('search').'%')
       ->orWhere('description','like','%'.$request->get('search').'%');
+    });
 
     $records = $records->orderBy('id','ASC');
     if($request->has('limit'))

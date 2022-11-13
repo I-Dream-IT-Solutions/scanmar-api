@@ -16,7 +16,7 @@ class MasterGroupListAction
   {
     $records = new MasterGroup();
 
-    $records = $records->orderBy('id','DESC');
+    $records = $records->orderBy('groupx','ASC');
     if($request->has('limit'))
     $records = $records->paginate($request->get('limit'));
     else

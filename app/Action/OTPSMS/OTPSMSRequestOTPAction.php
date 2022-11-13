@@ -37,7 +37,8 @@ class OTPSMSRequestOTPAction
                                        ->verifications
                                        ->create($receiverNumber, "sms");
 
-          return $verification->status;
+          return response(["status" => 200, "message" => "OTP sent successfully"]);
+          // return $verification->status;
       } catch (Exception $e) {
           dd("Error: ". $e->getMessage());
       }

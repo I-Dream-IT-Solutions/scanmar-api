@@ -26,11 +26,11 @@ class ScheduleUpdateRequest extends FormRequest
     {
         return [
             'schedule_type'  => 'required|max:191',
-            'document_type'  => 'required|max:191',
+            // 'document_type'  => 'required|max:191',
             'schedule_date'  => 'required|max:191',
             'schedule_time'  => 'required|max:191',
             'remarks'  =>  'required|max:191',
-            'document'  => 'required|max:191',
+            // 'document'  => 'required|max:191',
           ];
     }
     protected function failedValidation(Validator $validator)

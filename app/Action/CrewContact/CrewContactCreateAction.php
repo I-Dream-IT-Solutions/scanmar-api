@@ -14,7 +14,7 @@ class CrewContactCreateAction
   public function execute($request)
   {
     $data = $request->all();
-    $records[] = CrewContact::create([
+    $records = CrewContact::create([
       'crew_no'  => Auth::user()->crew_no,
       'label'  => $data['label'],
       'description'  => $data['description'],

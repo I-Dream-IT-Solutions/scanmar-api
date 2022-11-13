@@ -17,6 +17,7 @@ class EducationListAction
     $records = new CrewEducation();
 
     $records = $records->where('crew_no',Auth::user()->crew_no);
+    $records = $records->where('is_deleted','N');
     if($request->has('search'))
     $records = $records->where('level','like','%'.$request->get('search').'%')
       ->orWhere('school','like','%'.$request->get('search').'%')

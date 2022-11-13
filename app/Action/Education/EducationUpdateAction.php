@@ -6,6 +6,7 @@ use Illuminate\Pagination\Paginator;
 use Session;
 use Log;
 use App\Models\CrewEducation;
+use App\Action\Notification\NotificationCreateAction;
 use Auth;
 
 class EducationUpdateAction
@@ -24,12 +25,32 @@ class EducationUpdateAction
       'course'  => $data['course'],
       'yearfrom'  => $data['yearfrom'],
       'yearto'  => $data['yearto'],
-      'modified_date'  => date('Y-m-d H:i:s'),
-      'modified_by'  => Auth::user()->id,
-      'status'  => config('constants.STAT_FOR_APPROVAL'),
     ];
 
-    $record->update($educ);
+    $record->fill($educ);
+
+    if($record->status == config('constants.STAT_NEW')){
+      $record->modified_date = date('Y-m-d H:i:s');
+      $record->modified_by = Auth::user()->id;
+      $record->save();
+    }
+    else{
+      $changes = $record->getDirty();
+      $record = CrewEducation::find($id);
+      $record->metadata = json_encode($changes);
+      $record->modified_date = date('Y-m-d H:i:s');
+      $record->modified_by = Auth::user()->id;
+      $record->status = config('constants.STAT_FOR_APPROVAL');
+      $record->save();
+    }
+
+
+    $notifData =[
+      'id'=>$record->id,
+      'name'=>$record->level,
+    ];
+    $notif_action = new NotificationCreateAction();
+    $notif_action->execute($notifData,'update_education');
 
     return $record;
   }

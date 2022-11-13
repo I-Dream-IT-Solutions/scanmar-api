@@ -38,10 +38,11 @@ class OTPSMSVerifyOTPAction
                                                     "code" => $request->get('code')
                                                 ]
                                        );
-
-          return $verification->status;
+          return response(["status" => 200, "message" => $verification->status]);
+          // return $verification->status;
       } catch (Exception $e) {
-          dd("Error: ". $e->getMessage());
+          // dd("Error: ". $e->getMessage());
+          return response(["status" => 401, 'message' => 'Invalid']);
       }
 
     }

@@ -13,6 +13,6 @@ class CertificateRequest extends Model
     public $timestamps = false;
 
     public function certificate_type(){
-        return $this->belongsTo(MasterCertificateType::class, 'type','certificate_type_id');
+        return $this->belongsTo(MasterCertificateType::class, 'certificate_type_id');
       }
 }

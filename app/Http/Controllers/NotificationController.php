@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Action\Notification\NotificationListAction;
 use App\Action\Notification\NotificationCountUnreadAction;
+use App\Action\Notification\NotificationUpdateAction;
 use Auth;
 use Validator;
 use Log;
@@ -21,6 +22,11 @@ class NotificationController extends Controller
 
   public function countUnread(Request $request){
     $action = new NotificationCountUnreadAction();
+    $data = $action->execute($request);
+    return $data;
+  }
+  public function update(Request $request){
+    $action = new NotificationUpdateAction();
     $data = $action->execute($request);
     return $data;
   }
