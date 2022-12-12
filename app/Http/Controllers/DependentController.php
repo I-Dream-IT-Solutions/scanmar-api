@@ -43,9 +43,9 @@ class DependentController extends Controller
     return $data;
   }
 
-  public function destroy($id){
+  public function destroy(Request $request,$id){
     $action = new DependentDeleteAction();
-    $data = $action->execute($id);
+    $data = $action->execute($request,$id);
     return $data;
   }
 

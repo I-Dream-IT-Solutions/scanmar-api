@@ -29,8 +29,9 @@ class DependentCreateRequest extends FormRequest
       'name' => 'required|max:255',
       'relation' => 'required|max:255',
       'birthdate' => 'required',
-      'address' => 'required|max:255',
-      'contact_no' => 'required|max:255',
+      'address' => 'max:255',
+      'contact_no' => 'max:255',
+      'emailadd' => 'max:255',
       'has_benefit' => 'max:1',
       'in_case_of_emergency' => 'max:1',
     ];

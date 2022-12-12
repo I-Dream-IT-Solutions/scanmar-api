@@ -30,9 +30,7 @@ class OTPEmailRequestOTPAction
             'subject' => 'Scanmar OTP',
             'body' => 'Your OTP is : '. $otp
         ];
-        info($request->email);
         \Mail::to($request->email)->send(new sendEmail($mail_details));
-        info($mail_details);
         return response(["status" => 200, "message" => "OTP sent successfully"]);
         // }
         // else{

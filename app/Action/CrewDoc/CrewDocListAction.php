@@ -15,7 +15,7 @@ class CrewDocListAction
   public function execute($request)
   {
     $records = new CrewDoc();
-
+    info(Auth::user());
     if($request->has('search')){
       $records = $records->where(function($q)use($request){
         $q->where('name','like',"%{$request->search}%")
@@ -36,14 +36,6 @@ class CrewDocListAction
     $records = $records->paginate($request->get('limit'));
     else
     $records = $records->get();
-
-    foreach($records as $record){
-      $metadata = str_replace('\\','',$record->metadata);
-      $metadata = json_decode($record,true);
-
-      if(is_array($metadata))
-      $record->fill($metadata);
-    }
 
     return $records;
 

@@ -7,6 +7,7 @@ use Session;
 use Log;
 use Auth;
 use App\Models\CrewAllottee;
+use App\Models\MasterBank;
 use App\Action\Notification\NotificationCreateAction;
 
 class AllotteeCreateAction
@@ -15,26 +16,31 @@ class AllotteeCreateAction
   public function execute($request)
   {
     $data = $request->all();
+
+
+    $bank = MasterBank::where('code',$data['code'])->first();
+
     $records = CrewAllottee::create([
       'crew_no'  => Auth::user()->crew_no,
-      'last_name'  => $data['last_name'],
-      'first_name'  => $data['first_name'],
-      'middle_name'  => $data['middle_name'],
-      'email'  => $data['email'],
-      'telno'  => $data['telno'],
-      'address'  => $data['address'],
-      'zipcode'  => $data['zipcode'],
-      'relation'  => $data['relation'],
+      'last_name'  => $data['last_name']?$data['last_name']:'',
+      'first_name'  => $data['first_name']?$data['first_name']:'',
+      'middle_name'  => $data['middle_name']?$data['middle_name']:'',
+      'email'  => $data['email']?$data['email']:'',
+      'telno'  => $data['telno']?$data['telno']:'',
+      'address'  => $data['address']?$data['address']:'',
+      'zipcode'  => $data['zipcode']?$data['zipcode']:'',
+      'relation'  => $data['relation']?$data['relation']:'',
       'code'  => $data['code'],
-      'bbranch'  => $data['bbranch'],
-      'acct_type'  => $data['acct_type'],
+      'descr'  => $bank?$bank->descr:'',
+      'bankcode'  => $bank?$bank->bankcode:'',
+      'bbranch'  => $data['bbranch']?$data['bbranch']:'',
+      'acct_type'  => $data['acct_type']?$data['acct_type']:'',
       'acct_no'  => isset($data['acct_no'])?$data['acct_no']:'',
-      // 'callice'  => $data['callice'],
+      'callice'  => $data['callice']?'T':'F',
+      'dolact'  => $data['dolact']?'T':'F',
 
       'modes'  => '',
       'allottyp'  => '',
-      'bankcode'  => '',
-      'descr'  => '',
       'pcharger'  => '0',
       'bcharges'  => '0',
       'mode'  => '0',
@@ -101,7 +107,7 @@ class AllotteeCreateAction
 
     $notifData =[
       'id'=>$records->id,
-      'name'=>$records->level,
+      'name'=>$records->first_name.' '.$records->last_name,
     ];
 
     $notif_action = new NotificationCreateAction();

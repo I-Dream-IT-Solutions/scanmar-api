@@ -11,6 +11,7 @@ use App\Models\CrewDoc;
 use App\Models\Notification;
 use App\Models\SystemUser;
 use Pusher\Pusher;
+use App\Action\Notification\NotificationCreateAction;
 
 class CrewDocDeleteAction
 {
@@ -21,8 +22,7 @@ class CrewDocDeleteAction
 
     $newData = [
       'is_deleted'=>'Y',
-      'deleted_by'=>Auth::user()->id,
-      'delete_reason'=>"For Deletion",
+      'deleted_by'=>Auth::user()->id
     ];
 
     if($data->status == config('constants.STAT_NEW')){
@@ -31,6 +31,7 @@ class CrewDocDeleteAction
     }
     else{
       $data->metadata = json_encode($newData);
+      $data->delete_reason ="For Deletion";
       $data->status = config('constants.STAT_FOR_APPROVAL');
     }
 
@@ -38,9 +39,10 @@ class CrewDocDeleteAction
 
     // $this->notify($data);
 
+    $data = $data->load('document');
     $notifData =[
       'id'=>$data->id,
-      'name'=>$data->name,
+      'name'=>$data->document?$data->document->document_name:'',
     ];
     $notif_action = new NotificationCreateAction();
     $notif_action->execute($notifData,'delete_document');

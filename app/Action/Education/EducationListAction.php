@@ -32,7 +32,7 @@ class EducationListAction
     else
     $records = $records->get();
 
-
+    info($records);
     return $records;
   }
 

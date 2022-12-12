@@ -14,7 +14,7 @@ class CrewDependent extends Model
     public $timestamps = false;
 
     protected $appends = [
-  		'has_benefit','in_case_of_emergency'
+  		'in_case_of_emergency'
   	];
 
     public function getBirthdateAttribute($date){
@@ -36,10 +36,19 @@ class CrewDependent extends Model
         return 0;
   	}
     public function getInCaseOfEmergencyAttribute($value){
-      if($value)
+      if($value == 'T')
         return 1;
       else
         return 0;
+  	}
+
+    public function getMetadataAttribute($value){
+      $metadata = str_replace('\\','',$value);
+      $metadata = json_decode($value,true);
+      if(is_array($metadata))
+      $this->fill($metadata);
+
+      return $value;
   	}
 
 }

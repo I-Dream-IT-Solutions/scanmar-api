@@ -17,9 +17,12 @@ class CurrentAddressUpdateAction
   public function execute($request)
   {
     $data = $request->all();
-
+    $sendNotif = true;
     $profile = CrewProfile::find(Auth::user()->crew_profile_id);
     $forApprovals = MasterProfileApprovalFields::get()->pluck('fieldname')->toArray();
+
+    if($profile->status == config('constants.STAT_FOR_APPROVAL'))
+      $sendNotif = false;
 
     $metadata = str_replace('\\','',$profile->metadata);
     $metadata = json_decode($metadata,true);
@@ -49,7 +52,7 @@ class CurrentAddressUpdateAction
     $profile->status = config('constants.STAT_FOR_APPROVAL');
     $profile->save();
 
-    if(count($newMetadata)){
+    if(count($newMetadata) && $sendNotif){
       $notifData =[
         'id'=>$profile->id,
         'name'=>$profile->first_name.' '.$profile->last_name,

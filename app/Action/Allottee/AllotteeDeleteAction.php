@@ -26,6 +26,7 @@ class AllotteeDeleteAction
       $data->fill($newData);
     else{
       $data->metadata = json_encode($newData);
+      $data->delete_reason ="For Deletion";
       $data->status = config('constants.STAT_FOR_APPROVAL');
     }
     $data->save();
@@ -33,7 +34,7 @@ class AllotteeDeleteAction
 
     $notifData =[
       'id'=>$data->id,
-      'name'=>$data->level,
+      'name'=>$data->first_name.' '.$data->last_name,
     ];
     $notif_action = new NotificationCreateAction();
     $notif_action->execute($notifData,'delete_allottee');

@@ -17,6 +17,7 @@ class ScheduleListAction
     $records = new Schedule();
 
     $records = $records->where('crew_id',Auth::user()->crew_no);
+    $records = $records->where('is_deleted','N');
     if($request->has('search')){
       $records = $records->where(function($q)use($request){
         $q->where('schedule_type','like','%'.$request->get('search').'%')

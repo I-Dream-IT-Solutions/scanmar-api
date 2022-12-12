@@ -29,15 +29,15 @@ class CrewDocCreateRequest extends FormRequest
 
       'type'  =>'required|max:191',
       'code'  =>'required|max:191',
-      'docno'  =>'required|max:191',
+      'docno'  =>'max:191',
       // 'date_issue'  =>'required',
       // 'date_exp'  =>'nullable',
-      'date_issue'  =>'required',
+      'date_issue'  =>'nullable',
       'date_exp'  =>'nullable',
       'location'  =>'max:191',
       'school'  =>'max:191',
       'remarks'  =>'max:191',
-      'filex'  =>['required','mimes:jpeg,jpg,png,pdf','max:10240'],
+      'filex'  =>['mimes:jpeg,jpg,png,pdf','max:10240'],
 
 
       // 'internal_Code'  => 'max:191',

@@ -20,7 +20,7 @@ class OTPSMSVerifyOTPAction
   public function execute($request)
     {
       // $receiverNumber = "+639171138864";
-      $receiverNumber = $request->get('phone_number');
+      $receiverNumber = $request->phone_number;
       try {
 
           $account_sid = "AC13f382348256d45b532b2fa0bd8988e5";
@@ -35,10 +35,14 @@ class OTPSMSVerifyOTPAction
                                        ->verificationChecks
                                        ->create([
                                                     "to" => $receiverNumber,
-                                                    "code" => $request->get('code')
+                                                    "code" => $request->code
                                                 ]
                                        );
+
+          if($verification->status == 'approved')
           return response(["status" => 200, "message" => $verification->status]);
+          else
+          return response(["status" => 401, 'message' => 'Invalid']);
           // return $verification->status;
       } catch (Exception $e) {
           // dd("Error: ". $e->getMessage());

@@ -26,10 +26,10 @@ class EducationCreateRequest extends FormRequest
   public function rules()
   {
     return [
-      'level' => 'required|max:191',
+      'level_no' => 'required|max:191',
       'school' => 'required|max:191',
       'school_address' => 'max:191',
-      'course' => 'required|max:191',
+      'course' => 'max:191',
       'yearfrom' => 'required|max:191',
       'yearto' => 'required|max:191',
     ];
@@ -43,7 +43,7 @@ class EducationCreateRequest extends FormRequest
   public function attributes()
   {
     return [
-      'level' => 'Level',
+      'level_no' => 'Level',
       'school' => 'School',
       'school_address' => 'School Address',
       'course' => 'Course',

@@ -20,8 +20,11 @@ class PersonalInformationUpdateAction
   {
     $data = $request->all();
     $profile = CrewProfile::find(Auth::user()->crew_profile_id);
-
+    $sendNotif = true;
     $forApprovals = MasterProfileApprovalFields::get()->pluck('fieldname')->toArray();
+
+    if($profile->status == config('constants.STAT_FOR_APPROVAL'))
+      $sendNotif = false;
 
     $photo = $profile->getOriginal('photo');
     if($profile->getOriginal('tmp_photo'))
@@ -94,7 +97,7 @@ class PersonalInformationUpdateAction
     $profile->status = config('constants.STAT_FOR_APPROVAL');
     $profile->save();
 
-    if(count($newMetadata)){
+    if(count($newMetadata) && $sendNotif){
       $notifData =[
         'id'=>$profile->id,
         'name'=>$profile->first_name.' '.$profile->last_name,

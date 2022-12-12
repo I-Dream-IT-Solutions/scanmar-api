@@ -15,7 +15,7 @@ class ScheduleDeleteAction
   {
     $data = Schedule::find($schedule_id);
 
-    $data->status = config('constants.STAT_FOR_DELETION');
+    $data->is_deleted = 'Y';
     $data->save();
     return $data;
   }

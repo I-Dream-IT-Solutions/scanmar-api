@@ -23,18 +23,22 @@ class NotificationCreateAction
     $href = '';
 
     if(str_contains($notification_type,'document'))
-      $href = 'crew/dependent/'. Auth::user()->crew_no;
+      $href = 'crew/document/'. Auth::user()->crew_profile_id;
     if(str_contains($notification_type,'profile'))
-      $href = 'crew/profile/'. Auth::user()->crew_no;
+      $href = 'crew/update/'. Auth::user()->crew_profile_id;
     if(str_contains($notification_type,'dependent'))
-      $href = 'crew/dependent/'. Auth::user()->crew_no;
+      $href = 'crew/dependent/'. Auth::user()->crew_profile_id;
     if(str_contains($notification_type,'work_experience'))
-      $href = 'crew/work-experience/'. Auth::user()->crew_no;
+      $href = 'crew/work-experience/'. Auth::user()->crew_profile_id;
     if(str_contains($notification_type,'education'))
-      $href = 'crew/education/'. Auth::user()->crew_no;
+      $href = 'crew/education/'. Auth::user()->crew_profile_id;
+    if(str_contains($notification_type,'allottee'))
+      $href = 'crew/allottee/'. Auth::user()->crew_profile_id;
 
-    foreach($users as $user)
-      $target_id[] = (string)$user->id;
+    foreach($users as $user){
+        if($user->id != Auth::user()->id)
+        $target_id[] = (string)$user->id;
+    }
 
     $notification_content = [
       'item_id'=>$record['id'],
@@ -71,8 +75,7 @@ class NotificationCreateAction
       "1480691",
       array('cluster' => 'ap1','useTLS'=>true)
     );
-
-    $pusher->trigger('pusher_notification', 'notification', $notif->id);
+    $pusher->trigger('pusher_notification', 'notification', $notif->notification_id);
   }
 
 }

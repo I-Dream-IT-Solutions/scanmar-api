@@ -16,17 +16,6 @@ class RegisterAction
   public $successStatus = 200;
   public function execute($request)
   {
-    $validator = Validator::make($request->all(), [
-      // 'first_name' => 'required',
-      // 'last_name' => 'required',
-      'email' => 'required|unique:system_user',
-      'password' => 'required',
-      'c_password' => 'required|same:password',
-    ]);
-    if ($validator->fails()) {
-      return response()->json(['error'=>$validator->errors()], 401);
-    }
-
     $prefix = date('Y');
     $crew_no = $prefix.sprintf('%04d', 1);
 
@@ -63,7 +52,10 @@ class RegisterAction
     $input['allow_to_chat_by_crew'] = '0';
     $input['with_crew_notification'] = '1';
     $input['with_announcement_notification'] = '1';
+    $input['with_certificate_notification'] = '1';
     $input['with_scheduler_notification'] = '1';
+    $input['defaultotp'] = $input['email'];
+    $input['defaultmpin'] = '';
     unset($input['c_password']);
     unset($input['api_key']);
     $user = SystemUser::create($input);

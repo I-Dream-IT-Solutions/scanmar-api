@@ -13,20 +13,20 @@ use Auth;
 class DependentDeleteAction
 {
 
-  public function execute($id)
+  public function execute($request,$id)
   {
     $data = CrewDependent::find($id);
 
     $newData = [
       'is_deleted'=>'Y',
       'deleted_by'=>Auth::user()->id,
-      'delete_reason'=>"For Deletion",
     ];
 
     if($data->status == config('constants.STAT_NEW'))
       $data->fill($newData);
     else{
       $data->metadata = json_encode($newData);
+      $data->delete_reason ="For Deletion";
       $data->status = config('constants.STAT_FOR_APPROVAL');
     }
 

@@ -30,11 +30,13 @@ Route::post('logout', 'UserController@logout');
 
 Route::group(['middleware' => 'auth.apikey'], function () {
   Route::post('login', 'UserController@login');
-  Route::post('register', 'UserController@register');
+  Route::post('registers', 'UserController@register');
+  Route::post('forgot-password', 'UserController@forgotPassword');
 });
 
 
 Route::get('/crew-doc/export/{id}','CrewDocController@export');
+Route::get('/payroll/download/{id}','PayrollController@download');
 
 Route::get('/image','ProfileController@viewImage');
 Route::group(['middleware' => 'auth:api'], function () {
@@ -139,6 +141,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
   Route::group(['prefix' => '/payroll'], function () {
     Route::get('/','PayrollController@index');
+
   });
 
 
@@ -219,6 +222,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/','ScheduleController@store');
     Route::post('/{schedule_id}','ScheduleController@update');
     Route::delete('/{schedule_id}','ScheduleController@destroy');
+  });
+
+  Route::group(['prefix' => '/settings-contact'], function () {
+    Route::post('/','SettingsContactController@create');
+    Route::post('/set-default','SettingsContactController@setDefault');
+    Route::delete('/','SettingsContactController@deleteContact');
   });
 
   Route::group(['prefix' => '/schedule-status'], function () {

@@ -16,6 +16,7 @@ class MasterBankBranchListAction
   {
     $records = new MasterBankBranch();
 
+    $records = $records->where('descr','!=','');
     if($request->has('bcode'))
       $records = $records->where('code',$request->get('bcode'));
 

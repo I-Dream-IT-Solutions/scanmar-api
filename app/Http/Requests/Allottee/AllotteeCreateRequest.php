@@ -30,16 +30,17 @@ class AllotteeCreateRequest extends FormRequest
       'last_name' => 'required|max:191',
       'first_name' => 'required|max:191',
       'middle_name' => 'max:191',
-      'relation' => 'required|max:191',
-      'email' => 'required|max:191',
+      'relation' => 'max:191',
+      'email' => 'max:191',
       'telno' => 'max:191',
-      'address' => 'required|max:191',
-      'zipcode' => 'required|max:191',
+      'address' => 'max:191',
+      'zipcode' => 'max:191',
       'code' => 'required|max:191',
-      'bbranch' => 'required|max:191',
+      'bbranch' => 'max:191',
       'acct_type' => ['required','max:191',Rule::in(['SA', 'CA'])],
       'acct_no' => 'required|max:191',
-      // 'callice' => ['required','max:191',Rule::in(['T', 'F'])],
+      'callice' => '',
+      'dolact' => '',
     ];
   }
 

@@ -28,13 +28,13 @@ class CrewDocUpdateRequest extends FormRequest
     return [
       'type'  =>'required|max:191',
       'code'  =>'required|max:191',
-      'docno'  =>'required|max:191',
-      'date_issue'  =>'required',
+      'docno'  =>'max:191',
+      'date_issue'  =>'nullable',
       'date_exp'  =>'nullable',
       'location'  =>'max:191',
       'school'  =>'max:191',
       'remarks'  =>'max:191',
-      'filex'  =>['nullable','mimes:jpeg,jpg,png,pdf','max:10240'],
+      'filex'  =>['mimes:jpeg,jpg,png,pdf','max:10240'],
 
     ];
   }

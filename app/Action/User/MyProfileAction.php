@@ -79,7 +79,8 @@ class MyProfileAction
 
     $contact = [
       'mobile'=> $mobile,
-      'email'=> $email
+      'email'=> $email,
+      'default'=>Auth::user()->defaultotp
   	];
 
     $currentAddress= [
@@ -110,7 +111,8 @@ class MyProfileAction
       'lastName'=> $profile->emerlname,
       'relation'=> $profile->emerrelat,
       'contact'=> $profile->emertel,
-      'address'=> $profile->emeradd
+      'address'=> $profile->emeradd,
+      'email'=> $profile->kinemail
     ];
 
     $dirty = $profile->getDirty();

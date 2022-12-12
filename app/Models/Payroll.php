@@ -17,4 +17,8 @@ class Payroll extends Model
       return $this->belongsTo(MasterPayrollType::class, 'type','type');
     }
 
+    public function getModDateAttribute($value){
+      return date('M Y',strtotime($this->year.'-'.$this->month.'-01'));
+  	}
+
 }

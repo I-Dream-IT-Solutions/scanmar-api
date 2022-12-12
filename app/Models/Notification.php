@@ -16,7 +16,7 @@ class Notification extends Model
     public $timestamps = false;
 
     protected $appends = [
-  		'ago','message'
+  		'ago','message','description'
   	];
 
 
@@ -38,19 +38,29 @@ class Notification extends Model
           $message .= 'List of Approved Field: <br />';
           foreach($notification_content['approved'] as $val){
             $val= (array)$val;
-            $message .= $val['field'] .' : '. $val['remarks'].' <br />';
+            $message .= '-'.$val['field'] .' : '. $val['remarks'].' <br />';
           }
         }
         if(count($notification_content['disapproved'])){
           $message .= 'List of Dispproved Field: <br />';
           foreach($notification_content['disapproved'] as $val){
             $val= (array)$val;
-            $message .= $val['field'] .' : '. $val['remarks'].' <br />';
+            $message .= '-'.$val['field'] .' : '. $val['remarks'].' <br />';
           }
         }
 
         return $message;
 
   	}
+
+    public function getDescriptionAttribute(){
+      if($this->notification_type == 'approve_disapprove_profile')
+        return config('constants.approve_disapprove_profile');
+      
+        $notification_content = json_decode($this->notification_content);
+        if(isset($notification_content->old_notif_type))
+        return config('constants.'.$this->notification_type)[$notification_content->old_notif_type];
+      return '';
+    }
 
 }

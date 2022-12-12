@@ -27,19 +27,20 @@ class AllotteeUpdateRequest extends FormRequest
      public function rules()
      {
        return [
-         'lastName' => 'required|max:191',
-         'firstName' => 'required|max:191',
-         'middleName' => 'max:191',
-         'relation' => 'required|max:191',
-         'email' => 'required|max:191',
+         'last_name' => 'required|max:191',
+         'first_name' => 'required|max:191',
+         'middle_name' => 'max:191',
+         'relation' => 'max:191',
+         'email' => 'max:191',
          'telno' => 'max:191',
-         'address' => 'required|max:191',
-         'zipcode' => 'required|max:191',
+         'address' => 'max:191',
+         'zipcode' => 'max:191',
          'code' => 'required|max:191',
-         'bbranch' => 'required|max:191',
-         'acctType' => ['required','max:191',Rule::in(['SA', 'CA'])],
-         'acctNo' => 'required|max:191',
-         // 'callice' => ['required','max:191',Rule::in(['T', 'F'])],
+         'bbranch' => 'max:191',
+         'acct_type' => ['required','max:191',Rule::in(['SA', 'CA'])],
+         'acct_no' => 'required|max:191',
+         'callice' => '',
+         'dolact' => '',
        ];
      }
 
@@ -51,9 +52,9 @@ class AllotteeUpdateRequest extends FormRequest
      public function attributes()
      {
        return [
-         'lastName' => 'Last Name',
-         'firstName' => 'First Name',
-         'middleName' => 'Middle Name',
+         'last_name' => 'Last Name',
+         'first_name' => 'First Name',
+         'middle_name' => 'Middle Name',
          'relation' => 'Relation',
          'email' => 'Email',
          'telno' => 'Telephone Number',
@@ -61,8 +62,8 @@ class AllotteeUpdateRequest extends FormRequest
          'zipcode' => 'Zip Code',
          'code' => 'Code',
          'bbranch' => 'Bank Branch',
-         'acctType' => 'Account Type',
-         'acctNo' => 'Account Number',
+         'acct_type' => 'Account Type',
+         'acct_no' => 'Account Number',
          'callice' => 'Callice',
        ];
      }

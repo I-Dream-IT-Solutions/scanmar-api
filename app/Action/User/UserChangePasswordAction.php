@@ -14,15 +14,20 @@ class UserChangePasswordAction
   public function execute($request)
   {
     $record = SystemUser::find(Auth::user()->id);
-    $data = $request->all();
+    
+    if(Hash::make($input['current_password'] == $record->get('current_password'))){
+      $data = $request->all();
+  
+      $data['password'] = Hash::make($request->get('new_password'));
+  
+      $record->update($data);
+  
+      return $record;
 
-    $data['password'] = Hash::make($request->get('new_password'));
-
-    $record->update($data);
-
-
-
-    return $record;
+    }
+    else{
+      return response()->json(['message'=>'invalidPassword'], 422);
+    }
   }
 
 

@@ -15,10 +15,21 @@ class EducationCreateAction
   public function execute($request)
   {
     $data = $request->all();
+
+    $level = '';
+    if($data['level_no'] == 1)
+      $level = 'Elementary';
+    if($data['level_no'] == 2)
+      $level = 'Secondary';
+    if($data['level_no'] == 3)
+      $level = 'College';
+    if($data['level_no'] == 4)
+      $level = 'Vocational Course';
+
     $records = CrewEducation::create([
       'crew_no'  => Auth::user()->crew_no,
-      'level'  => $data['level'],
-      'level_no'  => '',
+      'level'  => $level,
+      'level_no'  => $data['level_no'],
       'attnment'  => '',
       'ccode'  => '',
       'scode'  => '',

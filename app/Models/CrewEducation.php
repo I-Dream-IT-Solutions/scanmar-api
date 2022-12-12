@@ -21,4 +21,13 @@ class CrewEducation extends Model
       return $value;
   	}
 
+    public function getMetadataAttribute($value){
+      $metadata = str_replace('\\','',$value);
+      $metadata = json_decode($value,true);
+      if(is_array($metadata))
+      $this->fill($metadata);
+
+      return $value;
+  	}
+
 }

@@ -35,15 +35,6 @@ class CrewWorkExperienceListAction
     else
     $records = $records->get();
 
-    foreach($records as $record){
-      if($record->status == config('constants.STAT_FOR_APPROVAL')){
-        $metaData = json_decode($record->metadata,true);
-        if($metaData)
-          $record->fill($metaData);
-
-      }
-    }
-
     return $records;
   }
 

@@ -22,7 +22,7 @@ class OTPSMSRequestOTPAction
 
       // $receiverNumber = "+639171138864";
       $receiverNumber = $request->get('phone_number');
-
+      info($request->all());
       try {
 
           $account_sid = "AC13f382348256d45b532b2fa0bd8988e5";

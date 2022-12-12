@@ -19,13 +19,20 @@ class ScheduleCreateAction
       'schedule_type'  => $data['schedule_type'],
       'crew_id'  => Auth::user()->crew_no,
       'client_id'  => $data['client_id'],
-      // 'document_type'  => $data['document_type'],
       'schedule_date'  => $data['schedule_date'],
       'schedule_time'  => $data['schedule_time'],
       'remarks'  =>  $data['remarks'],
-      'document'  => '',
       'date_created'  =>  date('Y-m-d H:i:s'),
-      'status'  => config('constants.STAT_FOR_APPROVAL'),
+      'status'  => config('constants.STAT_NEW'),
+
+      'is_crew'  => 'Y',
+      'document_type'  => '',
+      'document'  => '',
+      'groupx'  => '',
+      'created_by'  => Auth::user()->id,
+      'date_created'  => date('Y-m-d H:i:s'),
+      'modified_by'  => Auth::user()->id,
+      'modified_date'  => date('Y-m-d H:i:s'),
     ]);
 
     return $records;

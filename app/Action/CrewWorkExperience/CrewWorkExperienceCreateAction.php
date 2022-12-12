@@ -30,6 +30,7 @@ class CrewWorkExperienceCreateAction
     $principal = MasterPrincipal::where('id',$data['pcode'])->first();
     $vessel = MasterVessel::where('vessel_id',$data['vescode'])->first();
     $cause = MasterDisembarkCause::where('code',$data['causecode'])->first();
+    $engine = MasterVesselEngine::where('id',$data['enginecode'])->first();
 
     $records = CrewWorkExperience::create([
       'crew_no'  => Auth::user()->crew_no,
@@ -85,16 +86,17 @@ class CrewWorkExperienceCreateAction
       'causecode'  => $data['causecode'],
       'cause'  => $cause?$cause->name:'',
 
-
       'groupx'  => '',
       'route'  => $data['route'],
-      'enginecode'  => $data['enginecode'],
+      'enginecode'  => $data['enginecode']?$data['enginecode']:'',
+      'make'  => $engine?$engine->engine_make:'',
       'flag'  => $data['flag'],
 
       'grt'  => $data['grt'],
       'bhp'  =>$data['bhp'],
       'nrt'  => $data['nrt'],
-      'eng_kw'  => $data['kw'],
+      'gear'  => $data['kw'],
+      'eng_kw'  => '',
       'status'  => config('constants.STAT_NEW'),
       'last_update'  => date('Y-m-d H:i:s'),
     ]);
@@ -110,6 +112,6 @@ class CrewWorkExperienceCreateAction
     return $records;
   }
 
-
+//dateRangeOverlapse
 
 }

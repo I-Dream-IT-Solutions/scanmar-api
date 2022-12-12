@@ -21,18 +21,35 @@ class CrewDoc extends Model
       return $this->belongsTo(MasterDocument::class, 'code','code');
     }
 
-    public function getDateIssueAttribute($date){
-      return date('m-d-Y',strtotime($date));
+    public function getDateIssueAttribute($value){
+      if($value){
+        $date = substr($value, 0, 4).'-'.substr($value, 6,2).'-'.substr($value, 4,2);
+        return date('m-d-Y',strtotime($date));
+      }
+      return null;
   	}
 
-    public function getDateExpAttribute($date){
+    public function getDateExpAttribute($value){
+      if($value){
+      $date = substr($value, 0, 4).'-'.substr($value, 6,2).'-'.substr($value, 4,2);
       return date('m-d-Y',strtotime($date));
+      }
+      return null;
   	}
 
     public function getStatusAttribute($value){
       $metaData = json_decode($this->metadata,true);
       if(isset($metaData['is_deleted']) && $metaData['is_deleted'] == 'Y')
         return config('constants.STAT_FOR_DELETION');
+
+      return $value;
+  	}
+
+    public function getMetadataAttribute($value){
+      $metadata = str_replace('\\','',$value);
+      $metadata = json_decode($value,true);
+      if(is_array($metadata))
+      $this->fill($metadata);
 
       return $value;
   	}
