@@ -176,7 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
-        \sbamtr\LaravelSourceEncrypter\SourceEncryptServiceProvider::class,
+        // \sbamtr\LaravelSourceEncrypter\SourceEncryptServiceProvider::class,
 
     ],
 
